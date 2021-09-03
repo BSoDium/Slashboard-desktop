@@ -1,0 +1,19 @@
+{
+  "name": "slashboard",
+  "productName": "Slashboard",
+  "version": "0.9.1",
+  "description": "Electron app to monitor personal server statuses in real time",
+  "main": "./dist/main/main.js",
+  "author": {
+    "name": "l3alr0g",
+    "email": "negreljerzy.philippe@gmail.com",
+    "url": "https://github.com/l3alr0g/Slashboard"
+  },
+  "scripts": {
+    "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",
+    "link-modules": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/link-modules.js",
+    "postinstall": "yarn electron-rebuild && yarn link-modules"
+  },
+  "license": "MIT",
+  "dependencies": {}
+}

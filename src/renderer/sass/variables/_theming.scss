@@ -1,0 +1,19 @@
+$dahsboard-bg: linear-gradient(to right top, #312b3a, #043e46);
+$login-bg: linear-gradient(to right top, #164242, #091897);
+
+$titlebar-bg: #061a2b;
+
+$body-panel-bg: #061a2b65;
+
+$block-neutral: #061a2b65;
+
+$block-accent: #061a2bb6;
+
+:export {
+  dahsboardBg: $dahsboard-bg;
+  loginBg: $login-bg;
+  titlebarBg: $titlebar-bg;
+  bodyPanelBg: $body-panel-bg;
+  blockNeutral: $block-neutral;
+  blockAccent: $block-accent;
+}

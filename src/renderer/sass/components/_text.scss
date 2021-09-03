@@ -1,0 +1,79 @@
+.danger-text {
+  color: #f44336;
+}
+
+.tooltip {
+  color: rgb(175, 175, 175);
+}
+
+h1 {
+  font-size: 2em;
+  font-weight: 350;
+  text-transform: uppercase;
+  margin: 0;
+}
+
+h2 {
+  font-size: 1.5em;
+  font-weight: 300;
+  color: rgb(209, 209, 209);
+  margin: 0;
+}
+
+h3 {
+  font-size: 1em;
+  font-weight: 300;
+  color: rgb(209, 209, 209);
+  margin: 0;
+}
+
+.h-light {
+  font-weight: 300;
+}
+
+.h-normal {
+  font-weight: 400;
+}
+
+.h-bold {
+  font-weight: 500;
+}
+
+.h-primary {
+  color: #fff;
+}
+
+.h-secondary {
+  color: rgb(209, 209, 209);
+}
+
+.t-input {
+  height: 50px;
+  background-color: #0f2436;
+  border-radius: 7px;
+  margin: 10px 0px;
+  padding: 0px 10px;
+  border: none;
+  color: white;
+  font-size: medium;
+}
+
+.t-select {
+  margin: 10px 0px;
+  color: #fff;
+}
+
+.t-impact,
+.t-impact-min {
+  font-weight: 400;
+  color: rgb(255, 255, 255);
+  white-space: nowrap;
+}
+
+.t-impact {
+  font-size: 3em;
+}
+
+.t-impact-min {
+  font-size: 1.5em;
+}

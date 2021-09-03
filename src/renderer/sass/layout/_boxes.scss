@@ -1,0 +1,29 @@
+.layout-btn-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin: 3px;
+}
+
+.title-box {
+  display: flex;
+  flex-direction: column;
+}
+
+.button-band {
+  text-align: right;
+  // padding: 20px 30px 40px 10px; // top right bottom left
+  padding: 20px;
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.flex-column {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

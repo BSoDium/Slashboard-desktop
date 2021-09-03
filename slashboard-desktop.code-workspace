@@ -1,0 +1,29 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    "conventionalCommits.scopes": ["desktop-client", "deps"],
+    "git.ignoreLimitWarning": true,
+    "editor.formatOnSave": true
+  },
+  "launch": {
+    "version": "0.2.0",
+    "configurations": [
+      {
+        "name": "Run Desktop client",
+        "type": "pwa-node",
+        "request": "launch",
+        "cwd": "${workspaceRoot}",
+        "args": ["start"],
+        "runtimeExecutable": "yarn",
+        "resolveSourceMapLocations": [
+          "${workspaceFolder}/",
+          "!/node_modules/**"
+        ]
+      }
+    ]
+  }
+}

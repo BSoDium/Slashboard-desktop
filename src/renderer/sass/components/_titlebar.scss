@@ -1,0 +1,50 @@
+.titlebar-text {
+  color: rgba(255, 255, 255, 0.473);
+  font-family: Arial, Helvetica, sans-serif;
+  font-weight: bold;
+  width: 100px;
+  padding: 3px;
+}
+
+.titlebar-grabber {
+  -webkit-app-region: drag;
+  width: 100%;
+}
+
+.titlebar-controls {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+.titlebar-control-button {
+  background-color: rgba(255, 255, 255, 0);
+  margin: 2px;
+  width: max-content;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.titlebar-minimize {
+  &:hover {
+    color: rgb(10, 163, 22);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
+}
+
+.titlebar-maximize {
+  &:hover {
+    color: rgb(226, 178, 19);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
+}
+
+.titlebar-close {
+  &:hover {
+    color: rgb(226, 19, 19);
+  }
+  color: rgb(23, 38, 70);
+  transition: color 0.1s;
+}

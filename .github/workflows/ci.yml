@@ -1,0 +1,17 @@
+name: CI
+
+on:
+  push:
+    branches: [main, ci-cd/*]
+  pull_request:
+    branches: [main, ci-cd/*]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: yarn
+      - run: yarn
+      - run: yarn

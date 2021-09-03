@@ -1,0 +1,108 @@
+@use 'renderer/sass/variables/theming';
+
+.server-stats-titlebar {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+}
+
+.server-stats-content {
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  margin-top: 20px;
+  overflow-y: auto;
+}
+
+.server-chart {
+  box-sizing: border-box;
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 0;
+}
+
+.chart {
+  position: relative;
+}
+
+.chart-title {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding: 5px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  backdrop-filter: blur(2px);
+}
+
+.terminal-wrapper {
+  height: 300px;
+  overflow: auto;
+  background-color: #061a2bb6;
+}
+
+.hardware {
+  box-sizing: border-box;
+  height: fit-content;
+  width: 100%;
+  display: grid;
+  // display two elements stacked upon each other on the left, and one element on the right
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'cpu disk'
+    'os disk';
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  margin: 10px 0px;
+}
+
+.hardware-component {
+  width: 1fr;
+  height: 1fr;
+  background-color: theming.$block-accent;
+  border-radius: 14px;
+  padding: 20px 0px;
+}
+
+.hardware-component-description {
+  margin: 0 30px 20px 20px;
+  height: fit-content;
+}
+
+.explorer {
+  box-sizing: border-box;
+  margin: 15px;
+  padding: 5px;
+  overflow: auto;
+}
+
+.explorer-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+  padding: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.466);
+}
+
+.explorer-item-description {
+  margin: 0px 30px;
+}
+
+.display-icon {
+  height: 100px;
+}
+
+.chart-group {
+  box-sizing: border-box;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 10px;
+}

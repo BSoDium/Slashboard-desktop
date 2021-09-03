@@ -1,0 +1,117 @@
+@use 'renderer/sass/variables/theming';
+
+.window-wrapper {
+  width: 100vw;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.titlebar-wrapper {
+  box-sizing: border-box;
+  height: 22px;
+  width: 100%;
+  background-color: theming.$titlebar-bg;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
+.dashboard-wrapper {
+  background: theming.$dahsboard-bg;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  display: flex;
+  flex-direction: row;
+  box-sizing: border-box;
+}
+
+.login-wrapper {
+  background: theming.$login-bg;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.body-wrapper {
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+.body-panel-wrapper {
+  background: theming.$body-panel-bg;
+  padding: 20px;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px;
+  color: #fff;
+  box-sizing: border-box;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.server-wrapper {
+  background: theming.$block-neutral;
+  border-radius: 10px;
+  box-sizing: border-box;
+  width: fit-content;
+  padding: 20px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: row;
+}
+
+.sidebar-wrapper {
+  background: #061a2b;
+  padding: 5px;
+  height: calc(100% - 24px);
+  color: #fff;
+  box-sizing: border-box;
+  overflow: hidden;
+  white-space: nowrap;
+  position: absolute;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.msg-wrapper {
+  text-align: center;
+  position: relative;
+  height: fit-content;
+  width: 400px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.modal-wrapper {
+  position: relative;
+  background-color: #061a2b;
+  border-radius: 10px;
+  height: fit-content;
+  width: fit-content;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.server-stats-wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}

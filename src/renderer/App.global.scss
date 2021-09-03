@@ -1,0 +1,39 @@
+@import './sass/components/buttons';
+@import './sass/components/loader';
+@import './sass/components/scrollbar';
+@import './sass/components/sidebar';
+@import './sass/components/titlebar';
+@import './sass/components/tag';
+@import './sass/components/text';
+@import './sass/components/modals';
+
+@import './sass/layout/wrappers';
+@import './sass/layout/boxes';
+
+@import './sass/pages/dashboard';
+@import './sass/pages/login';
+@import './sass/pages/serverstats';
+@import './sass/pages/settings';
+
+body {
+  font-family: Montserrat;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+  font-weight: 300;
+}
+
+:not(input):not(textarea),
+:not(input):not(textarea)::after,
+:not(input):not(textarea)::before {
+  -webkit-user-select: none;
+  user-select: none;
+  cursor: inherit;
+}
+
+input,
+button,
+textarea,
+:focus {
+  outline: none;
+}

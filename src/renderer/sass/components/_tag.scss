@@ -1,0 +1,36 @@
+.tag {
+  border-radius: 4px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  padding: 0.5em 1em;
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+  background-color: rgb(218, 218, 218);
+  color: rgb(0, 0, 0);
+  border: 1px solid #333333;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+}
+
+.t-dark {
+  border: 1px solid #39517e;
+  background-color: rgba(14, 29, 70, 0.397);
+  color: rgb(255, 255, 255);
+}
+
+.t-secondary {
+  border: 1px solid #082252;
+  background-color: rgba(14, 29, 70, 0.158);
+  color: rgb(255, 255, 255);
+}
+
+.t-rounded {
+  border-radius: 100vmax;
+}
+
+.t-disabled-dark {
+  border: 1px solid #39517e;
+  background-color: rgba(14, 29, 70, 0.397);
+}

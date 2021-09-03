@@ -1,0 +1,80 @@
+.login-card {
+  background: #ffffff;
+  border-radius: 5px;
+  width: 400px;
+  overflow: hidden;
+  box-shadow: 0 2.8px 2.2px rgba(0, 0, 0, 0.034),
+    0 6.7px 5.3px rgba(0, 0, 0, 0.048), 0 12.5px 10px rgba(0, 0, 0, 0.06),
+    0 22.3px 17.9px rgba(0, 0, 0, 0.072), 0 41.8px 33.4px rgba(0, 0, 0, 0.086),
+    0 100px 95px rgba(0, 0, 0, 0.12);
+}
+
+.card-header {
+  background: #061a2b;
+  padding: 50px 20px 50px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 20px 30px 20px;
+  margin: 40px 0px 30px 0px;
+}
+
+.card-body span,
+.card-body input,
+.card-body button {
+  margin: 5px 0px 5px 0px;
+}
+
+.card-body input {
+  height: 40px;
+  border-radius: 0px;
+  border: none;
+  border-bottom: grey 1px solid;
+  background-color: rgba(255, 255, 255, 0);
+  font-size: 1.2em;
+}
+
+.card-body input:focus {
+  background-color: rgba(110, 112, 146, 0.068);
+  transition: linear 0.2s;
+}
+
+.settings-banner {
+  display: auto;
+  font-size: 0.9rem;
+  margin-top: 10px;
+}
+
+.autologin {
+  float: left;
+}
+
+.remember-me {
+  display: inline-block;
+  white-space: nowrap;
+}
+
+.remember-me input {
+  vertical-align: middle;
+  margin: 0;
+}
+
+.remember-me span {
+  vertical-align: middle;
+  margin-left: 10px;
+}
+
+.password-retrieval {
+  padding-top: 11px;
+  float: right;
+}
+
+.login-submit {
+  margin-top: 30px;
+  padding: 0px 10px 0px 10px;
+  align-items: center;
+}

@@ -1,0 +1,34 @@
+.modal-mask {
+  position: absolute;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.445);
+  top: 0;
+  left: 0;
+  backdrop-filter: blur(2px);
+  justify-content: center;
+}
+
+.modal-header {
+  box-sizing: border-box;
+  border-radius: 10px 10px 0 0;
+  width: 100%;
+  height: fit-content;
+}
+
+.modal-body {
+  box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+}
+
+.modal-footer {
+  box-sizing: border-box;
+  border-radius: 0 0 10px 10px;
+  width: 100%;
+  height: fit-content;
+}
+
+.md-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
