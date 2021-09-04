@@ -4,11 +4,13 @@ import Select, { ActionMeta, ValueType } from 'react-select';
 const SelectType = (props: {
   options: Array<any>;
   onChange: (value: ValueType<any, any>, action: ActionMeta<any>) => void;
+  defaultValue?: ValueType<any, any>;
 }) => {
   return (
     <Select
       options={props.options}
       onChange={props.onChange}
+      defaultValue={props.defaultValue}
       name="type"
       theme={(theme) => ({
         ...theme,

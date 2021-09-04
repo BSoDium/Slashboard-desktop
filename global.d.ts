@@ -52,11 +52,11 @@ declare global {
       };
       hardware: {
         cpu: {
-          cores: Array<{
+          cores: {
             model: string;
             speed: number;
             load: number;
-          }>;
+          }[];
           global: {
             model: string;
             speed: number;
@@ -72,14 +72,14 @@ declare global {
             [key: string]: NetworkInterface[];
           };
         };
-        disks: Array<{
+        disks: {
           _filesystem: string;
           _blocks: number;
           _used: number;
           _available: number;
           _capacity: string;
           _mounted: string;
-        }>;
+        }[];
       };
     };
   }

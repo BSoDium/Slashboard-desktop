@@ -157,6 +157,9 @@ class EditDeviceModal extends React.Component<Props, State> {
             <SelectType
               options={this.deviceTypeOptions}
               onChange={this.handleSelectChange}
+              defaultValue={this.deviceTypeOptions.find(
+                (option) => option.value === type
+              )}
             />
           </div>
         </ModalBody>

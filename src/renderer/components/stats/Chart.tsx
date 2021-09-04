@@ -109,6 +109,7 @@ class Chart extends React.Component<Props, {}> {
               height > 0 &&
               data.map((series, i) => (
                 <>
+                  {/* should have a key */}
                   {area && (
                     <>
                       <LinearGradient

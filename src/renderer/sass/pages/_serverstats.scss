@@ -57,8 +57,8 @@
   grid-template-areas:
     'cpu disk'
     'os disk';
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
+  column-gap: 10px;
+  row-gap: 10px;
   margin: 10px 0px;
 }
 
@@ -77,22 +77,32 @@
 
 .explorer {
   box-sizing: border-box;
-  margin: 15px;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 10px;
+  margin: 5px;
   padding: 5px;
   overflow: auto;
 }
 
-.explorer-item {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
+.explorer-item,
+.explorer-item-large {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   align-items: center;
-  padding: 10px;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.466);
+  padding: 10px 15px;
+  font-size: smaller;
+  border-radius: 10px;
+  background-color: #0f2c4475;
+}
+
+.explorer-item-large {
+  grid-template-columns: repeat(4, 1fr);
 }
 
 .explorer-item-description {
   margin: 0px 30px;
+  overflow: hidden;
 }
 
 .display-icon {
@@ -104,5 +114,5 @@
   width: 100%;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 10px;
+  column-gap: 10px;
 }

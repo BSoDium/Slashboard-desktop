@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
-import DeviceInfo from 'renderer/components/stats/DeviceInfo';
+import DeviceInfo from 'renderer/components/stats/info/DeviceInfo';
 
 import { InvalidKey, Unresponsive } from 'renderer/components/ContextMessages';
 
