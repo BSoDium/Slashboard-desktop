@@ -81,7 +81,7 @@ class ServerStats extends React.Component<any, State> {
         <div className="server-stats-wrapper">
           <div className="server-stats-titlebar">
             <div className="title-box">
-              <h1>{response?.data.name}</h1>
+              <h1>{response?.data?.name}</h1>
               <h2>
                 {ip}:{port}
               </h2>
@@ -105,7 +105,7 @@ class ServerStats extends React.Component<any, State> {
                   subtitle="Core load"
                 />
                 <RAMChart // I need to somehow merge the memory and cpu charts into one component
-                  memoryState={response?.data.hardware.memory!}
+                  memoryState={response?.data?.hardware?.memory!}
                   duration={50}
                   stroke="#ff2e2e"
                 />
@@ -121,7 +121,7 @@ class ServerStats extends React.Component<any, State> {
     }
     return (
       <div className="body-wrapper">
-        <div className="body-panel-wrapper">{content}</div>
+        <div className="body-panel-wrapper shadow">{content}</div>
       </div>
     );
   }

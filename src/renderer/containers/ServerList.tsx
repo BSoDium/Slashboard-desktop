@@ -74,7 +74,7 @@ class ServerList extends React.Component<Props, State> {
     const { servers, timeSinceLastUpdate, lastUpdated, isLoading } = this.state;
     const { offline } = this.props;
     return (
-      <div className="body-panel-wrapper">
+      <div className="body-panel-wrapper shadow">
         {navigator.onLine || offline.value ? (
           <>
             <div className="list-titlebar-transparent">

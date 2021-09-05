@@ -60,7 +60,7 @@ const NoInternet = (props: { onClick: () => void }) => {
           connected to the internet. In order to display relevant data,
           Slashboard needs a stable internet connection.
         </p>
-        <p style={{ color: 'rgb(0, 255, 0)' }}>
+        <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
           If you're using a wifi connection, try connecting to your router via
           ethernet. If this doesn't work, try rebooting the router.
         </p>
@@ -101,8 +101,9 @@ const InvalidKey = () => {
           denied" status. This generally means that the pairing key is invalid
           and needs to be updated.
         </p>
-        <p style={{ color: 'rgb(255, 0, 0)' }}>
-          No quick fix is available at the moment. Please file an issue.
+        <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
+          Try retrieving the pairing key from the key.txt file in Pulsar's root
+          directory, then changing it on the client.
         </p>
       </div>
       <Link to="/">
@@ -143,7 +144,7 @@ const Unresponsive = () => {
           between the client and the server, or to the Pulsar service having
           stopped working.
         </p>
-        <p style={{ color: 'rgb(0, 255, 0)' }}>
+        <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
           Try rebooting the server. If this doesn't work, try reinstalling
           Pulsar.
         </p>

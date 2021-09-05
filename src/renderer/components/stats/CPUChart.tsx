@@ -85,7 +85,7 @@ class CPUChart extends React.Component<Props, State> {
                 data={arrayData}
                 width={parent.width}
                 height={300}
-                scaleXMax={100}
+                scaleYMax={100}
                 area={this.state.areaChart}
                 title={title}
                 subtitle={subtitle}

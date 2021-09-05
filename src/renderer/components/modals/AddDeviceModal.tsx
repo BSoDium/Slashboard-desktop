@@ -30,7 +30,7 @@ class AddDeviceModal extends React.Component<Props, State> {
   deviceTypeOptions = [
     { value: 'server', label: 'Server' },
     { value: 'pc', label: 'PC' },
-    { value: 'smartphone', label: 'Smartphone' },
+    { value: 'laptop', label: 'Laptop' },
   ];
 
   constructor(props: Props) {

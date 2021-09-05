@@ -32,7 +32,7 @@ export default class DiskInfo extends React.Component<Props, State> {
   constructor(props: Props) {
     super(props);
     this.state = {
-      excludeVolatileDisks: false,
+      excludeVolatileDisks: true,
     };
   }
 
@@ -89,7 +89,7 @@ export default class DiskInfo extends React.Component<Props, State> {
               value: excludeVolatileDisks,
               setter: (value) => this.setState({ excludeVolatileDisks: value }),
             }}
-            defaultValue={true}
+            defaultValue={excludeVolatileDisks}
           />
         </div>
         <div className="explorer" style={{ maxHeight: '510px' }}>

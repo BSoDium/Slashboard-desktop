@@ -2,6 +2,7 @@ import React from 'react';
 
 import { curveBasis } from '@visx/curve';
 import { AreaClosed, LinePath } from '@visx/shape';
+import { AxisRight } from '@visx/axis';
 import { ScaleSVG } from '@visx/responsive';
 import { Group } from '@visx/group';
 import { scaleTime, scaleLinear } from '@visx/scale';
@@ -9,6 +10,9 @@ import { LinearGradient } from '@visx/gradient';
 import { extent, max } from 'd3-array';
 
 import theming from 'renderer/sass/variables/_theming.scss';
+import SettingSwitch from 'renderer/components/settings/Settings';
+
+import { CSSTransition } from 'react-transition-group';
 
 interface Point {
   value: number;
@@ -51,17 +55,22 @@ interface Props {
   margin?: Margin;
   showPoints?: boolean;
   area?: boolean;
-  scaleXMax?: number;
+  scaleYMax?: number;
   bg?: string;
   title?: string;
   subtitle?: string;
 }
 
-class Chart extends React.Component<Props, {}> {
+interface State {
+  isHovered: boolean;
+  dynamicScale: boolean;
+}
+
+class Chart extends React.Component<Props, State> {
   static defaultProps = {
     margin: {
       top: 20,
-      right: 20,
+      right: 35,
       bottom: 20,
       left: 20,
     },
@@ -72,12 +81,17 @@ class Chart extends React.Component<Props, {}> {
 
   constructor(props: Props) {
     super(props);
-    this.state = {};
+    this.state = {
+      isHovered: false,
+      dynamicScale: false,
+    };
   }
 
   render() {
-    const { data, width, height, margin, showPoints, area, scaleXMax, bg } =
+    const { data, width, height, margin, showPoints, area, scaleYMax, bg } =
       this.props;
+
+    const { isHovered, dynamicScale } = this.state;
 
     const allData = data
       .map((value) => value.data)
@@ -92,7 +106,10 @@ class Chart extends React.Component<Props, {}> {
       domain: extent(allData, getX) as [Date, Date],
     });
     const yScale = scaleLinear<number>({
-      domain: [0, scaleXMax ? scaleXMax : (max(allData, getY) as number)],
+      domain: [
+        0,
+        !dynamicScale && scaleYMax ? scaleYMax : (max(allData, getY) as number),
+      ],
     });
 
     // update scale output ranges
@@ -100,11 +117,18 @@ class Chart extends React.Component<Props, {}> {
     yScale.range([height - margin?.bottom! - margin?.top!, 0]);
 
     return (
-      <div className="chart">
+      <div
+        className="chart"
+        onMouseEnter={() => {
+          this.setState({ isHovered: true });
+        }}
+        onMouseLeave={() => {
+          this.setState({ isHovered: false });
+        }}
+      >
         <ScaleSVG width={width} height={height}>
           <rect width={width} height={height} fill={bg} rx={14} ry={14} />
           <Group top={margin?.top} left={margin?.left!}>
-            {/* <AxisLeft scale={yScale} stroke="#fff" tickStroke="#fff" /> */}
             {width > 0 &&
               height > 0 &&
               data.map((series, i) => (
@@ -162,11 +186,47 @@ class Chart extends React.Component<Props, {}> {
                   />
                 ))
               )}
+            <AxisRight
+              scale={yScale}
+              stroke="#fff"
+              numTicks={4}
+              left={width - margin?.right! - margin?.left!}
+              tickLabelProps={(_) => ({
+                fill: '#a3a3a3',
+                fontSize: 10,
+                fontWeight: 600,
+                textAnchor: 'start',
+              })}
+              hideAxisLine
+              hideTicks
+            />
           </Group>
         </ScaleSVG>
-        <div className="chart-title">
-          <h2 style={{ color: '#fff' }}>{this.props.title}</h2>
-          <h3>{this.props.subtitle}</h3>
+        <div className="chart-banner">
+          <div className="chart-title">
+            <h2 style={{ color: '#fff' }}>{this.props.title}</h2>
+            <h3>{this.props.subtitle}</h3>
+          </div>
+          <div className="chart-options">
+            <CSSTransition
+              in={isHovered}
+              timeout={300}
+              unmountOnExit
+              classNames="scale-option"
+            >
+              <SettingSwitch
+                text="Dynamic scale"
+                subtext="The chart's scale adapts dynamically to the data it displays"
+                state={{
+                  value: dynamicScale,
+                  setter: (value) => {
+                    this.setState({ dynamicScale: value });
+                  },
+                }}
+                defaultValue={dynamicScale}
+              />
+            </CSSTransition>
+          </div>
         </div>
       </div>
     );

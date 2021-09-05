@@ -15,6 +15,7 @@
   height: fit-content;
   width: 100%;
   margin-top: 20px;
+  padding-right: 10px;
   overflow-y: auto;
 }
 
@@ -29,15 +30,24 @@
   position: relative;
 }
 
-.chart-title {
+.chart-banner {
   position: absolute;
   top: 10px;
   left: 10px;
-  padding: 5px;
+  display: flex;
+  flex-direction: row;
   border-radius: 10px;
+  backdrop-filter: blur(5px);
+}
+
+.chart-title {
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  backdrop-filter: blur(2px);
+}
+
+.chart-options {
+  padding: 0px 20px;
 }
 
 .terminal-wrapper {
@@ -115,4 +125,24 @@
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   column-gap: 10px;
+}
+
+// scale options
+
+.scale-option-enter {
+  opacity: 0;
+}
+
+.scale-option-enter-active {
+  opacity: 1;
+  transition: opacity 0.2s ease-in;
+}
+
+.scale-option-exit {
+  opacity: 1;
+}
+
+.scale-option-exit-active {
+  opacity: 0;
+  transition: opacity 0.2s ease-in;
 }

@@ -1,6 +1,5 @@
 import React from 'react';
 import { CompactState } from 'renderer/App';
-import { useEffect } from 'react';
 
 const SettingSwitch = (props: {
   text: string;
@@ -9,10 +8,6 @@ const SettingSwitch = (props: {
   defaultValue?: boolean;
 }) => {
   const { state, defaultValue } = props;
-
-  useEffect(() => {
-    state?.setter(defaultValue ?? false);
-  }, [defaultValue]);
 
   return (
     <div className="setting-line">

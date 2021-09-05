@@ -2,6 +2,8 @@ import React from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
 
+import theming from 'renderer/sass/variables/_theming.scss';
+
 import {
   ModalHandler,
   HandlerToken,
@@ -41,14 +43,14 @@ const SideBarButton = ({
   disabled,
   history,
 }: buttonProps) => {
-  const statusColor = disabled ? 'rgba(124, 124, 124, 0.548)' : 'white';
+  const statusColor = disabled ? theming.sidebarTabDisabledColor : 'white';
   return (
     <div
       className={`sidebar-button${disabled ? '' : '-enabled'}`}
       style={
         tab.type.name === componentName
           ? {
-              backgroundColor: 'rgba(88, 95, 110, 0.397)',
+              backgroundColor: theming.sidebarTabActiveBg,
             }
           : {}
       }
@@ -68,7 +70,10 @@ const SideBarButton = ({
         color={statusColor}
       />
       {isOpen ? (
-        <span className="sidebar-button-text" style={{ color: statusColor }}>
+        <span
+          className="sidebar-button-text h-bold"
+          style={{ color: statusColor }}
+        >
           {text}
         </span>
       ) : null}

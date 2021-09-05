@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import LoadingSkeleton from 'renderer/components/loading/LoadingSkeleton';
 import serverIcon from 'renderer/assets/hardware/server.svg';
 import pcIcon from 'renderer/assets/hardware/pc.svg';
-import phoneIcon from 'renderer/assets/hardware/smartphone.svg';
+import phoneIcon from 'renderer/assets/hardware/laptop.svg';
 import ModalHandler, {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
@@ -24,7 +24,7 @@ const statusColorMap: { [key: string]: string } = {
 const icons: { [key: string]: string } = {
   server: serverIcon,
   pc: pcIcon,
-  smartphone: phoneIcon,
+  laptop: phoneIcon,
 };
 
 interface Props {

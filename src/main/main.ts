@@ -132,7 +132,6 @@ const createWindow = async () => {
     return path.join(RESOURCES_PATH, ...paths);
   };
 
-  console.log(getAssetPath('server_compact.svg'));
   mainWindow = new BrowserWindow({
     width: 1280,
     height: 720,

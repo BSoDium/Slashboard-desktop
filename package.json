@@ -71,12 +71,12 @@
     "publish": {
       "provider": "github",
       "owner": "l3alr0g",
-      "repo": "server-dashboard"
+      "repo": "Slashboard-desktop"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+hhttps://github.com/l3alr0g/server-dashboard.git"
+    "url": "git+https://github.com/l3alr0g/Slashboard-desktop.git"
   },
   "author": {
     "name": "l3alr0g",
@@ -84,7 +84,7 @@
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/l3alr0g/server-dashboard/issues"
+    "url": "https://github.com/l3alr0g/Slashboard-desktop/issues"
   },
   "keywords": [
     "electron",
@@ -93,7 +93,7 @@
     "dashboard",
     "server"
   ],
-  "homepage": "https://github.com/l3alr0g/server-dashboard#readme",
+  "homepage": "https://github.com/l3alr0g/Slashboard-desktop#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
@@ -228,6 +228,7 @@
     "react-dom": "^17.0.2",
     "react-router-dom": "^5.2.0",
     "react-select": "^4.3.1",
+    "react-transition-group": "^4.4.2",
     "regenerator-runtime": "^0.13.5",
     "terminal-in-react": "^4.3.1",
     "typeface-cairo": "^1.1.13",

@@ -73,7 +73,8 @@
 }
 
 .sidebar-wrapper {
-  background: #061a2b;
+  background: #061a2bce;
+  backdrop-filter: blur(20px);
   padding: 5px;
   height: calc(100% - 24px);
   color: #fff;
@@ -114,4 +115,5 @@
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  overflow: hidden;
 }

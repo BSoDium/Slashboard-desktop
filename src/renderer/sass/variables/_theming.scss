@@ -9,6 +9,16 @@ $block-neutral: #061a2b65;
 
 $block-accent: #061a2bb6;
 
+$sidebar-tab-active-bg: rgba(40, 57, 95, 0.397);
+
+$sidebar-tab-active-hover: rgba(53, 68, 104, 0.178);
+
+$sidebar-tab-disabled-color: rgba(124, 124, 124, 0.548);
+
+.shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
 :export {
   dahsboardBg: $dahsboard-bg;
   loginBg: $login-bg;
@@ -16,4 +26,6 @@ $block-accent: #061a2bb6;
   bodyPanelBg: $body-panel-bg;
   blockNeutral: $block-neutral;
   blockAccent: $block-accent;
+  sidebarTabActiveBg: $sidebar-tab-active-bg;
+  sidebarTabDisabledColor: $sidebar-tab-disabled-color;
 }
