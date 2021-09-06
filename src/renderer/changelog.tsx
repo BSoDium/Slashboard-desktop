@@ -9,6 +9,6 @@ const changelog = (
     <li>setup title bar</li>
     <li>rewrite scss file structure to match boilerplate requirements</li>
   </ul>
-)
+);
 
-export default changelog
+export default changelog;

@@ -1,10 +1,11 @@
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 
 interface Props {
   text?: string;
 }
 
-class LoadingSpinner extends React.Component<Props, {}> {
+class LoadingSpinner extends React.Component<Props, unknown> {
   static defaultProps = {
     text: '',
   };
@@ -19,12 +20,12 @@ class LoadingSpinner extends React.Component<Props, {}> {
     return (
       <div className="Loader-container ld-centered">
         <div className="sk-chase">
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
-          <div className="sk-chase-dot"></div>
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
+          <div className="sk-chase-dot" />
         </div>
         <span style={{ marginTop: '40px' }}>{text}</span>
       </div>

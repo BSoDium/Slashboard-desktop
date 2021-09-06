@@ -5,22 +5,18 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-class ModalFooter extends React.Component<Props, {}> {
-  static defaultProps = {
-    shadow: false,
-  };
-  constructor(props: Props) {
-    super(props);
-  }
+const ModalFooter = (props: Props) => {
+  const { children, style } = props;
+  return (
+    <div className="modal-footer" style={style}>
+      {children}
+    </div>
+  );
+};
 
-  render() {
-    const { children, style } = this.props;
-    return (
-      <div className="modal-footer" style={style}>
-        {children}
-      </div>
-    );
-  }
-}
+ModalFooter.defaultProps = {
+  children: null,
+  style: {},
+};
 
 export default ModalFooter;

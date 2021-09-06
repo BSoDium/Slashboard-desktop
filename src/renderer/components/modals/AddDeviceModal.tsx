@@ -1,18 +1,20 @@
+/* eslint-disable import/no-cycle */
 import React from 'react';
 
 import Modal from 'renderer/components/modals/Modal';
 import ModalHeader from 'renderer/components/modals/ModalHeader';
 import ModalBody from 'renderer/components/modals/ModalBody';
 import ModalFooter from 'renderer/components/modals/ModalFooter';
-import ModalHandler, {
+import {
+  ModalHandler,
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
-import ServerList from 'renderer/containers/ServerList';
 import SelectType from 'renderer/components/modals/SelectType';
 import { ActionMeta, ValueType } from 'react-select';
+import ServerList from 'renderer/containers/ServerList';
 
 interface Props {
   token: HandlerToken;
@@ -153,7 +155,7 @@ class AddDeviceModal extends React.Component<Props, State> {
         <ModalFooter>
           <div className="button-band">
             <button
-              type="reset"
+              type="button"
               className="btn-empty b-normal"
               onClick={() => {
                 // close modal

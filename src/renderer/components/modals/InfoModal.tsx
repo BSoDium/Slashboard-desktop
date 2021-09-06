@@ -4,12 +4,13 @@ import Modal from 'renderer/components/modals/Modal';
 import ModalHeader from 'renderer/components/modals/ModalHeader';
 import ModalBody from 'renderer/components/modals/ModalBody';
 import ModalFooter from 'renderer/components/modals/ModalFooter';
-import ModalHandler, {
+import {
+  ModalHandler,
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 
 import logo from 'renderer/assets/Slashboard.svg';
-import changelog from 'changelog.js';
+import changelog from 'renderer/changelog';
 
 interface Props {
   token: HandlerToken;
@@ -84,7 +85,7 @@ class InfoModal extends React.Component<Props, State> {
         <ModalFooter>
           <div className="button-band">
             <button
-              type="reset"
+              type="button"
               className="btn-standard b-dark"
               onClick={() => {
                 // close modal

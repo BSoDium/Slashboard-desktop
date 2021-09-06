@@ -7,8 +7,8 @@ interface State {
   fullscreen: boolean;
 }
 
-class TitleBar extends React.Component<{}, State> {
-  constructor(props: {}) {
+class TitleBar extends React.Component<unknown, State> {
+  constructor(props: unknown) {
     super(props);
     this.state = {
       fullscreen: false, // should be set by electron
@@ -23,7 +23,7 @@ class TitleBar extends React.Component<{}, State> {
         style={{ display: fullscreen ? 'none' : 'auto' }}
       >
         <div className="titlebar-text">Slashboard</div>
-        <div className="titlebar-grabber"></div>
+        <div className="titlebar-grabber" />
         <div className="titlebar-controls">
           <button
             type="button"

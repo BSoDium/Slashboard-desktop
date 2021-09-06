@@ -1,8 +1,7 @@
 function ToHex(c: number): string {
-  var hex = c.toString(16);
-  return hex.length == 1 ? "0" + hex : hex;
+  const hex = c.toString(16);
+  return hex.length === 1 ? `0${hex}` : hex;
 }
-
 
 /**
  * A tiny library which generates fairly different colors from consecutive numbers,
@@ -14,6 +13,7 @@ class ColorGen {
     Math.floor(Math.random() * 255),
     Math.floor(Math.random() * 255),
   ];
+
   static rgbSteps = [
     Math.floor(Math.random() * 700),
     Math.floor(Math.random() * 700),
@@ -27,9 +27,9 @@ class ColorGen {
    * @returns rgb color string
    */
   static generate(value: number): string {
-    let rgb = new Array<number>(3);
+    const rgb = new Array<number>(3);
 
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 3; i += 1) {
       rgb[i] = (ColorGen.rgbOffsets[i] + ColorGen.rgbSteps[i] * value) % 255;
     }
 
@@ -56,7 +56,7 @@ class ColorGen {
   /**
    * Generate a color corresponding to a number between 0 and 1.
    * The closer to one the value, the hotter the color.
-   * @param value 
+   * @param value
    */
   static heatmap(value: number): string {
     const valueClamped = Math.max(0, Math.min(1, value));

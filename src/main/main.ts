@@ -14,9 +14,9 @@ import path from 'path';
 import { app, BrowserWindow, shell, ipcMain } from 'electron';
 import { autoUpdater } from 'electron-updater';
 import log from 'electron-log';
+import Store from 'electron-store';
 import MenuBuilder from './menu';
 import { resolveHtmlPath } from './util';
-import Store from 'electron-store';
 
 export default class AppUpdater {
   constructor() {
@@ -51,6 +51,7 @@ ipcMain.on('minimize', () => {
 });
 
 ipcMain.on('maximize', () => {
+  // eslint-disable-next-line @typescript-eslint/no-unused-expressions
   mainWindow?.isMaximized() ? mainWindow?.unmaximize() : mainWindow?.maximize();
 });
 
@@ -64,6 +65,7 @@ ipcMain.handle('getServers', () => {
 
 ipcMain.on('addServer', (_, ip, port, auth, type) => {
   // generate new id
+  // eslint-disable-next-line no-bitwise
   const id = (((1 << 24) * Math.random()) | 0).toString(24).toUpperCase(); // TODO: check if no other server has this id !!!
   // store the server credentials
   store.set(`servers.${id}`, {

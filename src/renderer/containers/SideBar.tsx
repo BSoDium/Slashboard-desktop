@@ -1,8 +1,8 @@
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/static-property-placement */
 import React from 'react';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import theming from 'renderer/sass/variables/_theming.scss';
 
 import {
   ModalHandler,
@@ -24,7 +24,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
-interface buttonProps {
+interface ButtonProps {
   icon: IconDefinition;
   text: string;
   componentName: string;
@@ -42,25 +42,31 @@ const SideBarButton = ({
   tab,
   disabled,
   history,
-}: buttonProps) => {
-  const statusColor = disabled ? theming.sidebarTabDisabledColor : 'white';
+}: ButtonProps) => {
+  const statusColor = disabled ? 'rgba(124, 124, 124, 0.548)' : 'white'; // theming.sidebarTabDisabledColor
+
+  const handleClick = () => {
+    if (!disabled) {
+      const url = `/dashboard/${text.toLowerCase()}`;
+      // console.debug(url)
+      history.push(url);
+    }
+  };
+
   return (
     <div
       className={`sidebar-button${disabled ? '' : '-enabled'}`}
+      role="button"
+      tabIndex={0}
       style={
         tab.type.name === componentName
           ? {
-              backgroundColor: theming.sidebarTabActiveBg,
+              backgroundColor: 'rgba(40, 57, 95, 0.397)', // theming.sidebarTabActiveBg
             }
           : {}
       }
-      onClick={() => {
-        if (!disabled) {
-          const url = `/dashboard/${text.toLowerCase()}`;
-          // console.debug(url)
-          history.push(url);
-        }
-      }}
+      onClick={handleClick}
+      onKeyDown={handleClick}
     >
       <FontAwesomeIcon
         icon={icon}
@@ -81,6 +87,10 @@ const SideBarButton = ({
   );
 };
 
+SideBarButton.defaultProps = {
+  disabled: false,
+};
+
 interface Props {
   tab: JSX.Element;
   match: any;
@@ -94,11 +104,10 @@ interface State {
 
 class SideBar extends React.Component<Props, State> {
   infoModal: HandlerToken | undefined;
+
   settingsModal: HandlerToken | undefined;
 
   static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
   };
 
@@ -192,7 +201,7 @@ class SideBar extends React.Component<Props, State> {
         <SideBarButton
           icon={faClipboard}
           text="Servers"
-          componentName={'ControlPanel'}
+          componentName="ControlPanel"
           isOpen={isSideBarOpen}
           tab={tab}
           history={history}
@@ -200,19 +209,19 @@ class SideBar extends React.Component<Props, State> {
         <SideBarButton
           icon={faPowerOff}
           text="IOT"
-          componentName={'IOT'}
+          componentName="IOT"
           isOpen={isSideBarOpen}
           tab={tab}
-          disabled={true}
+          disabled
           history={history}
         />
         <SideBarButton
           icon={faClipboardList}
           text="Logs"
-          componentName={'Logs'}
+          componentName="Logs"
           isOpen={isSideBarOpen}
           tab={tab}
-          disabled={true}
+          disabled
           history={history}
         />
       </div>
@@ -221,4 +230,3 @@ class SideBar extends React.Component<Props, State> {
 }
 
 export default withRouter(SideBar);
-export { SideBar };

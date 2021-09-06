@@ -1,6 +1,8 @@
 class OWStack<T> {
   stack: Array<T>;
+
   startIndex: number;
+
   length: number;
 
   /**
@@ -11,7 +13,7 @@ class OWStack<T> {
   constructor(length: number, init: (index: number) => T) {
     this.stack = new Array<T>(length);
     // initialize stack values
-    for (let i = 0; i < length; i++) {
+    for (let i = 0; i < length; i += 1) {
       this.stack[i] = init(i);
     }
     this.length = length;
@@ -27,7 +29,7 @@ class OWStack<T> {
    */
   push(value: T) {
     this.stack.push(value);
-    this.startIndex++;
+    this.startIndex += 1;
 
     // if more than half of the stack is unused, we can clear its lower end
     if (this.startIndex > this.length) {

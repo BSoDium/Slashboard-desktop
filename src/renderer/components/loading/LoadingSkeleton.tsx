@@ -1,10 +1,11 @@
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 
 interface Props {
   text?: string;
 }
 
-class LoadingSkeleton extends React.Component<Props, {}> {
+class LoadingSkeleton extends React.Component<Props, unknown> {
   static defaultProps = {
     text: '',
   };

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React from 'react';
 import hdd from 'renderer/assets/hardware/hdd.svg'; // Smashicons
 
@@ -112,7 +113,7 @@ export default class DiskInfo extends React.Component<Props, State> {
                 return null;
               }
               return (
-                <div key={index} className="explorer-item-large">
+                <div key={disk._mounted} className="explorer-item-large">
                   <FontAwesomeIcon icon={faHdd} size="2x" />
                   <div className="explorer-item-description">
                     <div className="t-impact-min">{disk._mounted}</div>

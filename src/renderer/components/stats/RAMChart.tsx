@@ -17,7 +17,7 @@ interface Props {
 /**
  * A chart showing cpu usage accross time.
  */
-class RAMChart extends React.Component<Props, {}> {
+class RAMChart extends React.Component<Props, unknown> {
   data: OWStack<Point>;
 
   constructor(props: Props) {

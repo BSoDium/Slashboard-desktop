@@ -1,3 +1,7 @@
+/* eslint-disable import/no-cycle */
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -6,7 +10,8 @@ import LoadingSkeleton from 'renderer/components/loading/LoadingSkeleton';
 import serverIcon from 'renderer/assets/hardware/server.svg';
 import pcIcon from 'renderer/assets/hardware/pc.svg';
 import phoneIcon from 'renderer/assets/hardware/laptop.svg';
-import ModalHandler, {
+import {
+  ModalHandler,
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 import DelDeviceModal from 'renderer/components/modals/DelDeviceModal';
@@ -31,8 +36,8 @@ interface Props {
   data: any;
   id: string;
   listRefresh: () => void;
-  match: any;
   location: any;
+  match: any;
   history: any;
 }
 
@@ -44,11 +49,10 @@ interface State {
 
 class Server extends React.Component<Props, State> {
   delModal: HandlerToken | undefined;
+
   editModal: HandlerToken | undefined;
 
   static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
     history: PropTypes.object.isRequired,
   };
 
@@ -63,12 +67,20 @@ class Server extends React.Component<Props, State> {
     this.fetchData = this.fetchData.bind(this);
   }
 
+  componentDidMount() {
+    this.delModal = ModalHandler.push(DelDeviceModal, this);
+    this.editModal = ModalHandler.push(EditDeviceModal, this);
+    this.fetchData();
+  }
+
   getId(): string {
-    return this.props.id;
+    const { id } = this.props;
+    return id;
   }
 
   getData(): any {
-    return this.props.data;
+    const { data } = this.props;
+    return data;
   }
 
   fetchData() {
@@ -86,15 +98,83 @@ class Server extends React.Component<Props, State> {
       });
   }
 
-  componentDidMount() {
-    this.delModal = ModalHandler.push(DelDeviceModal, this);
-    this.editModal = ModalHandler.push(EditDeviceModal, this);
-    this.fetchData();
-  }
-
   render() {
     const { isLoading, response, showMenu } = this.state;
     const { data, history } = this.props;
+
+    const handleClick = () => {
+      history.push(`/dashboard/servers/${data.ip}-${data.port}-${data.auth}`);
+    };
+
+    const fetchSuccess = !isLoading && response !== 'none' && (
+      <div className="tag t-dark">
+        <div
+          style={{
+            color: '#5493ff',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+          }}
+        >
+          {response.data.name}
+        </div>
+        <div>
+          status :{' '}
+          <span
+            style={{
+              color: statusColorMap[response.data.status],
+              fontWeight: 'bold',
+            }}
+          >
+            {response.data.status}
+          </span>
+        </div>
+        <div>
+          operating system :&nbsp;
+          {response.data.os ? (
+            <>
+              {response.data.os.type}&nbsp;
+              {response.data.os.architecture}&nbsp;build&nbsp;
+              {response.data.os.release}
+            </>
+          ) : (
+            'unable to retrieve'
+          )}
+        </div>
+      </div>
+    );
+
+    // response === 'none' ? (
+    const fetchFailed = !isLoading && (
+      <div className="tag t-dark">
+        <div
+          style={{
+            color: 'red',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+          }}
+        >
+          Connection timeout
+        </div>
+        <div>
+          status :{' '}
+          <span style={{ color: '#f44336', fontWeight: 'bold' }}>down</span>
+        </div>
+        <div>Server is either misconfigured or inactive</div>
+        <div className="tooltip" style={{ marginTop: '5px' }}>
+          An inactive server might be down for maintenance or under heavy load.
+          <br />
+          If this problem persists, check your Pulsar configuration.
+        </div>
+      </div>
+    );
+
+    const fetchFinished =
+      response === 'none'
+        ? // fetch failed
+          fetchFailed
+        : // fetch success
+          fetchSuccess;
+
     return (
       <div
         className="server-wrapper"
@@ -109,11 +189,8 @@ class Server extends React.Component<Props, State> {
           src={icons[data.type]}
           className="server-icon"
           alt="serverIcon"
-          onClick={() => {
-            history.push(
-              `/dashboard/servers/${data.ip}-${data.port}-${data.auth}`
-            );
-          }}
+          onClick={handleClick}
+          onKeyDown={handleClick}
         />
         <div className="server-details">
           <div className="server-details-header">
@@ -155,75 +232,13 @@ class Server extends React.Component<Props, State> {
           {isLoading ? (
             // fetch is in progress
             <LoadingSkeleton />
-          ) : // fetch is complete
-          response === 'none' ? (
-            // fetch failed
-            <>
-              <div className="tag t-dark">
-                <div
-                  style={{
-                    color: 'red',
-                    fontWeight: 'bold',
-                    textTransform: 'uppercase',
-                  }}
-                >
-                  Connection timeout
-                </div>
-                <div>
-                  status :{' '}
-                  <span style={{ color: '#f44336', fontWeight: 'bold' }}>
-                    down
-                  </span>
-                </div>
-                <div>Server is either misconfigured or inactive</div>
-                <div className="tooltip" style={{ marginTop: '5px' }}>
-                  An inactive server might be down for maintenance or under
-                  heavy load.
-                  <br />
-                  If this problem persists, check your Pulsar configuration.
-                </div>
-              </div>
-            </>
           ) : (
-            // fetch succeeded
-            <div className="tag t-dark">
-              <div
-                style={{
-                  color: '#5493ff',
-                  fontWeight: 'bold',
-                  textTransform: 'uppercase',
-                }}
-              >
-                {response.data.name}
-              </div>
-              <div>
-                status :{' '}
-                <span
-                  style={{
-                    color: statusColorMap[response.data.status],
-                    fontWeight: 'bold',
-                  }}
-                >
-                  {response.data.status}
-                </span>
-              </div>
-              <div>
-                operating system :&nbsp;
-                {response.data.os ? (
-                  <>
-                    {response.data.os.type}&nbsp;
-                    {response.data.os.architecture}&nbsp;build&nbsp;
-                    {response.data.os.release}
-                  </>
-                ) : (
-                  'unable to retrieve'
-                )}
-              </div>
-            </div>
+            // fetch is complete
+            fetchFinished
           )}
         </div>
         <div className="anchor">
-          <div className="server-actions"></div>
+          <div className="server-actions" />
         </div>
       </div>
     );

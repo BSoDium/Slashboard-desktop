@@ -30,18 +30,20 @@ class CPUChart extends React.Component<Props, State> {
 
   constructor(props: Props) {
     super(props);
+
+    const { coreStates } = props;
     this.state = {
-      areaChart: this.props.coreStates.length === 1,
+      areaChart: coreStates.length === 1,
     };
 
     // instantiate and initialize stacks
-    this.data = new Array<OWStack<Point>>(this.props.coreStates.length);
+    this.data = new Array<OWStack<Point>>(coreStates.length);
 
     const { duration } = this.props;
-    for (let i = 0; i < this.data.length; i++) {
-      this.data[i] = new OWStack<Point>(duration, (i) => {
+    for (let i = 0; i < this.data.length; i += 1) {
+      this.data[i] = new OWStack<Point>(duration, (j) => {
         const t = new Date();
-        t.setSeconds(t.getSeconds() - duration + i);
+        t.setSeconds(t.getSeconds() - duration + j);
         return {
           value: 0,
           date: t,
@@ -53,9 +55,11 @@ class CPUChart extends React.Component<Props, State> {
 
   render() {
     const { coreStates, title, subtitle, stroke } = this.props;
+    const { areaChart } = this.state;
+
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
-    for (let i = 0; i < this.data.length; i++) {
+    for (let i = 0; i < this.data.length; i += 1) {
       // push the new cpu values for each core
       this.data[i].push({
         value: coreStates[i].load,
@@ -86,7 +90,7 @@ class CPUChart extends React.Component<Props, State> {
                 width={parent.width}
                 height={300}
                 scaleYMax={100}
-                area={this.state.areaChart}
+                area={areaChart}
                 title={title}
                 subtitle={subtitle}
               />

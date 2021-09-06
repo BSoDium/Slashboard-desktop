@@ -1,3 +1,6 @@
+/* eslint-disable react/no-unused-state */
+/* eslint-disable react/forbid-prop-types */
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -10,9 +13,7 @@ interface State {
 
 class Login extends React.Component<any, State> {
   static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired
+    history: PropTypes.object.isRequired,
   };
 
   constructor(props: any) {
@@ -54,7 +55,7 @@ class Login extends React.Component<any, State> {
     history.push({
       pathname: '/',
       search: '',
-      state: { authSuccess: true }
+      state: { authSuccess: true },
     });
   }
 
@@ -103,7 +104,10 @@ class Login extends React.Component<any, State> {
             </div>
 
             <div className="login-submit">
-              <button type="button" className="btn-standard b-secondary b-shadow">
+              <button
+                type="button"
+                className="btn-standard b-secondary b-shadow"
+              >
                 Sign up
               </button>
               <button

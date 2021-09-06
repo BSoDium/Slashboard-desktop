@@ -6,11 +6,12 @@ const SelectType = (props: {
   onChange: (value: ValueType<any, any>, action: ActionMeta<any>) => void;
   defaultValue?: ValueType<any, any>;
 }) => {
+  const { options, onChange, defaultValue } = props;
   return (
     <Select
-      options={props.options}
-      onChange={props.onChange}
-      defaultValue={props.defaultValue}
+      options={options}
+      onChange={onChange}
+      defaultValue={defaultValue}
       name="type"
       theme={(theme) => ({
         ...theme,
@@ -50,6 +51,10 @@ const SelectType = (props: {
       }}
     />
   );
+};
+
+SelectType.defaultProps = {
+  defaultValue: null,
 };
 
 export default SelectType;

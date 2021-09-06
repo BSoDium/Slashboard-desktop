@@ -11,6 +11,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 
 const EmptyDashboard = (props: { onClick: () => void }) => {
+  const { onClick } = props;
   return (
     <div className="msg-wrapper">
       <FontAwesomeIcon
@@ -19,16 +20,16 @@ const EmptyDashboard = (props: { onClick: () => void }) => {
         color="#d4d4d4"
         style={{ paddingBottom: '50px' }}
       />
-      <h1>It's empty in here</h1>
+      <h1>It&apos;s empty in here</h1>
       <div style={{ padding: '20px' }}>
         <h2>Populate your dashboard by adding in some new servers</h2>
         <button
           type="button"
           className="btn-standard b-dark"
           style={{ marginTop: '40px' }}
-          onClick={props.onClick}
+          onClick={onClick}
         >
-          Let's get started
+          Let&apos;s get started
         </button>
       </div>
     </div>
@@ -36,6 +37,7 @@ const EmptyDashboard = (props: { onClick: () => void }) => {
 };
 
 const NoInternet = (props: { onClick: () => void }) => {
+  const { onClick } = props;
   return (
     <div className="msg-wrapper">
       <FontAwesomeIcon
@@ -45,7 +47,7 @@ const NoInternet = (props: { onClick: () => void }) => {
         style={{ paddingBottom: '30px' }}
       />
       <h1>Sorry</h1>
-      <h2>We couldn't find the internet</h2>
+      <h2>We couldn&apos;t find the internet</h2>
       <div className="tag t-dark" style={{ marginTop: '30px' }}>
         <p style={{ fontWeight: 'bold' }}>
           <FontAwesomeIcon
@@ -56,19 +58,20 @@ const NoInternet = (props: { onClick: () => void }) => {
           Troubleshooting :
         </p>
         <p>
-          This error is being displayed because your computer doesn't seem to be
-          connected to the internet. In order to display relevant data,
+          This error is being displayed because your computer doesn&apos;t seem
+          to be connected to the internet. In order to display relevant data,
           Slashboard needs a stable internet connection.
         </p>
         <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
-          If you're using a wifi connection, try connecting to your router via
-          ethernet. If this doesn't work, try rebooting the router.
+          If you&apos;re using a wifi connection, try connecting to your router
+          via ethernet. If this doesn&apos;t work, try rebooting the router.
         </p>
       </div>
       <button
+        type="button"
         className="btn-standard b-dark b-shadow"
         style={{ marginTop: '30px' }}
-        onClick={props.onClick}
+        onClick={onClick}
       >
         Ignore
       </button>
@@ -86,7 +89,7 @@ const InvalidKey = () => {
         style={{ paddingBottom: '30px' }}
       />
       <h1>Sorry</h1>
-      <h2>That key's not gonna work</h2>
+      <h2>That key&apos;s not gonna work</h2>
       <div className="tag t-dark" style={{ marginTop: '30px' }}>
         <p style={{ fontWeight: 'bold' }}>
           <FontAwesomeIcon
@@ -97,17 +100,18 @@ const InvalidKey = () => {
           Troubleshooting :
         </p>
         <p>
-          This error is being displayed because the server returned the "access
-          denied" status. This generally means that the pairing key is invalid
-          and needs to be updated.
+          This error is being displayed because the server returned the
+          &quot;access denied&quot; status. This generally means that the
+          pairing key is invalid and needs to be updated.
         </p>
         <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
-          Try retrieving the pairing key from the key.txt file in Pulsar's root
-          directory, then changing it on the client.
+          Try retrieving the pairing key from the key.txt file in Pulsar&apos;s
+          root directory, then changing it on the client.
         </p>
       </div>
       <Link to="/">
         <button
+          type="button"
           className="btn-standard b-dark b-shadow"
           style={{ marginTop: '30px' }}
         >
@@ -140,17 +144,18 @@ const Unresponsive = () => {
         </p>
         <p>
           This error is being displayed because the server failed to answer the
-          client's request. It might be due either to a broken connection
+          client&apos;s request. It might be due either to a broken connection
           between the client and the server, or to the Pulsar service having
           stopped working.
         </p>
         <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
-          Try rebooting the server. If this doesn't work, try reinstalling
+          Try rebooting the server. If this doesn&apos;t work, try reinstalling
           Pulsar.
         </p>
       </div>
       <Link to="/">
         <button
+          type="button"
           className="btn-standard b-dark b-shadow"
           style={{ marginTop: '30px' }}
         >

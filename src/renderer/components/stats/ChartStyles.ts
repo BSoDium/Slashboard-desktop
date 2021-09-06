@@ -1,4 +1,4 @@
-import { PointStyle, LineStyle } from 'renderer/components/stats/LineChart';
+import { PointStyle, LineStyle } from 'renderer/components/stats/Chart';
 
 interface ChartStyles {
   pointStyle: PointStyle;

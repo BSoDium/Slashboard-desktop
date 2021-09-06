@@ -1,4 +1,9 @@
 declare global {
+  interface CompactState {
+    value: any;
+    setter: (value: boolean) => void;
+  }
+
   interface Window {
     electron: {
       ipcRenderer: {

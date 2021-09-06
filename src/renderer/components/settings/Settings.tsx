@@ -1,5 +1,4 @@
 import React from 'react';
-import { CompactState } from 'renderer/App';
 
 const SettingSwitch = (props: {
   text: string;
@@ -7,14 +6,15 @@ const SettingSwitch = (props: {
   state?: CompactState;
   defaultValue?: boolean;
 }) => {
-  const { state, defaultValue } = props;
+  const { state, defaultValue, text, subtext } = props;
 
   return (
     <div className="setting-line">
       <div className="title-box">
-        <div className="setting-text">{props.text}</div>
-        <div className="setting-description">{props.subtext}</div>
+        <div className="setting-text">{text}</div>
+        <div className="setting-description">{subtext}</div>
       </div>
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label className="switch">
         <input
           type="checkbox"
@@ -23,10 +23,15 @@ const SettingSwitch = (props: {
           }}
           defaultChecked={defaultValue ?? false}
         />
-        <span className="slider rounded"></span>
+        <span className="slider rounded" />
       </label>
     </div>
   );
+};
+
+SettingSwitch.defaultProps = {
+  defaultValue: false,
+  state: undefined,
 };
 
 export default SettingSwitch;

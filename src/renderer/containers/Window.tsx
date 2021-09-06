@@ -5,20 +5,14 @@ interface Props {
   children: JSX.Element;
 }
 
-class Window extends React.Component<Props, {}> {
-  constructor(props: Props) {
-    super(props);
-  }
-
-  render() {
-    const { children } = this.props;
-    return (
-      <div className="window-wrapper">
-        <TitleBar />
-        {children}
-      </div>
-    );
-  }
-}
+const Window = (props: Props) => {
+  const { children } = props;
+  return (
+    <div className="window-wrapper">
+      <TitleBar />
+      {children}
+    </div>
+  );
+};
 
 export default Window;

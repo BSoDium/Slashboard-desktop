@@ -12,19 +12,12 @@ import ServerStats from 'renderer/components/stats/ServerStats';
 
 import 'renderer/App.global.scss';
 
-interface CompactState {
-  value: any;
-  setter: (value: boolean) => void;
-}
-
-interface Props { }
-
 interface State {
   offlineMode: boolean;
 }
 
-class App extends React.Component<Props, State> {
-  constructor(props: Props) {
+class App extends React.Component<any, State> {
+  constructor(props: any) {
     super(props);
     this.state = {
       offlineMode: false,
@@ -93,4 +86,3 @@ class App extends React.Component<Props, State> {
 }
 
 export default App;
-export { App, CompactState };

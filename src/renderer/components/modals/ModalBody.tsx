@@ -5,22 +5,18 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-class ModalBody extends React.Component<Props, {}> {
-  static defaultProps = {
-    shadow: false,
-  };
-  constructor(props: Props) {
-    super(props);
-  }
+const ModalBody = (props: Props) => {
+  const { children, style } = props;
+  return (
+    <div className="modal-body" style={style}>
+      {children}
+    </div>
+  );
+};
 
-  render() {
-    const { children, style } = this.props;
-    return (
-      <div className="modal-body" style={style}>
-        {children}
-      </div>
-    );
-  }
-}
+ModalBody.defaultProps = {
+  children: null,
+  style: {},
+};
 
 export default ModalBody;

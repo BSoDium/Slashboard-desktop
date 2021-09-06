@@ -1,6 +1,7 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
 import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
 
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
@@ -18,12 +19,6 @@ interface State {
 class ServerStats extends React.Component<any, State> {
   interval!: NodeJS.Timeout;
 
-  static propTypes = {
-    match: PropTypes.object.isRequired,
-    location: PropTypes.object.isRequired,
-    history: PropTypes.object.isRequired,
-  };
-
   constructor(props: any) {
     super(props);
     this.state = {
@@ -32,6 +27,22 @@ class ServerStats extends React.Component<any, State> {
       fetchFailed: false,
     };
     this.fetchData = this.fetchData.bind(this);
+  }
+
+  componentDidMount() {
+    // eslint-disable-next-line react/destructuring-assignment
+    const { match } = this.props;
+    this.fetchData(match.params.ip, match.params.port, match.params.auth);
+
+    this.interval = setInterval(() => {
+      // eslint-disable-next-line react/destructuring-assignment
+      const { ip, port, auth } = this.props.match.params;
+      this.fetchData(ip, port, auth);
+    }, 1000);
+  }
+
+  componentWillUnmount() {
+    clearInterval(this.interval);
   }
 
   fetchData(ip: string, port: string, auth: string) {
@@ -47,21 +58,8 @@ class ServerStats extends React.Component<any, State> {
       });
   }
 
-  componentDidMount() {
-    const { ip, port, auth } = this.props.match.params;
-    this.fetchData(ip, port, auth);
-
-    this.interval = setInterval(() => {
-      const { ip, port, auth } = this.props.match.params;
-      this.fetchData(ip, port, auth);
-    }, 1000);
-  }
-
-  componentWillUnmount() {
-    clearInterval(this.interval);
-  }
-
   render() {
+    const { match } = this.props;
     const { isLoading, response, fetchFailed } = this.state;
     const serverTimedOut = isLoading ? undefined : fetchFailed;
     const authFailed =
@@ -76,7 +74,7 @@ class ServerStats extends React.Component<any, State> {
       content = <InvalidKey />;
     } else if (!isLoading) {
       // response is readable, display stats
-      const { ip, port } = this.props.match.params;
+      const { ip, port } = match.params;
       content = (
         <div className="server-stats-wrapper">
           <div className="server-stats-titlebar">
@@ -117,7 +115,7 @@ class ServerStats extends React.Component<any, State> {
         </div>
       );
     } else {
-      content = <LoadingSpinner text={'Fetching data'} />;
+      content = <LoadingSpinner text="Fetching data" />;
     }
     return (
       <div className="body-wrapper">
@@ -127,4 +125,4 @@ class ServerStats extends React.Component<any, State> {
   }
 }
 
-export default withRouter(ServerStats);
+export default ServerStats;

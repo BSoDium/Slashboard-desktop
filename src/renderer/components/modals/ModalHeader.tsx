@@ -5,22 +5,18 @@ interface Props {
   style?: React.CSSProperties;
 }
 
-class ModalHeader extends React.Component<Props, {}> {
-  static defaultProps = {
-    shadow: false,
-  };
-  constructor(props: Props) {
-    super(props);
-  }
+const ModalHeader = (props: Props) => {
+  const { children, style } = props;
+  return (
+    <div className="modal-header" style={style}>
+      {children}
+    </div>
+  );
+};
 
-  render() {
-    const { children, style } = this.props;
-    return (
-      <div className="modal-header" style={style}>
-        {children}
-      </div>
-    );
-  }
-}
+ModalHeader.defaultProps = {
+  children: null,
+  style: {},
+};
 
 export default ModalHeader;

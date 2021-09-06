@@ -1,14 +1,13 @@
 import React from 'react';
 import moment from 'moment';
 
-import Server from 'renderer/components/Server';
+import ServerWithRouter from 'renderer/components/Server';
+// eslint-disable-next-line import/no-cycle
 import AddDeviceModal from 'renderer/components/modals/AddDeviceModal';
 import {
   ModalHandler,
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
-
-import { CompactState } from 'renderer/App';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSync, faPlus } from '@fortawesome/free-solid-svg-icons';
@@ -31,6 +30,7 @@ interface State {
 
 class ServerList extends React.Component<Props, State> {
   interval!: NodeJS.Timeout;
+
   addModal: HandlerToken | undefined;
 
   constructor(props: Props) {
@@ -54,20 +54,21 @@ class ServerList extends React.Component<Props, State> {
     // update "Last fetched :" text and server list every 5000 ms
     this.interval = setInterval(async () => {
       this.fetch();
+      const { lastUpdated } = this.state;
       this.setState({
-        timeSinceLastUpdate: moment(this.state.lastUpdated).fromNow(),
+        timeSinceLastUpdate: moment(lastUpdated).fromNow(),
       });
     }, 5000);
-  }
-
-  async fetch() {
-    const servers = await window.electron.ipcRenderer.storage.getServers();
-    this.setState({ servers, isLoading: false });
   }
 
   componentWillUnmount() {
     // clear interval before unmounting
     clearInterval(this.interval);
+  }
+
+  async fetch() {
+    const servers = await window.electron.ipcRenderer.storage.getServers();
+    this.setState({ servers, isLoading: false });
   }
 
   render() {
@@ -103,6 +104,7 @@ class ServerList extends React.Component<Props, State> {
                   Last fetched : {timeSinceLastUpdate}
                 </div>
                 <button
+                  type="button"
                   className="btn-flat"
                   onClick={() => {
                     this.setState({
@@ -125,7 +127,7 @@ class ServerList extends React.Component<Props, State> {
                   Object.values(servers).map((serverData, i) => {
                     const id = Object.keys(servers)[i];
                     return (
-                      <Server
+                      <ServerWithRouter
                         key={`${id}-${lastUpdated.getTime()}`}
                         data={serverData}
                         id={id}

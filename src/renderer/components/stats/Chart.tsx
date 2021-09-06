@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+/* eslint-disable react/static-property-placement */
 import React from 'react';
 
 import { curveBasis } from '@visx/curve';
@@ -9,7 +12,6 @@ import { scaleTime, scaleLinear } from '@visx/scale';
 import { LinearGradient } from '@visx/gradient';
 import { extent, max } from 'd3-array';
 
-import theming from 'renderer/sass/variables/_theming.scss';
 import SettingSwitch from 'renderer/components/settings/Settings';
 
 import { CSSTransition } from 'react-transition-group';
@@ -25,19 +27,19 @@ interface Line {
   style: LineStyle;
 }
 
-interface drawableStyle {
+interface DrawableStyle {
   cursor: string;
   stroke: string;
   strokeWidth: number;
   strokeOpacity: number;
 }
 
-interface PointStyle extends drawableStyle {
+interface PointStyle extends DrawableStyle {
   radius: number;
   fill: string;
 }
 
-interface LineStyle extends drawableStyle {
+interface LineStyle extends DrawableStyle {
   shapeRendering: string;
 }
 
@@ -76,7 +78,7 @@ class Chart extends React.Component<Props, State> {
     },
     showPoints: false,
     area: false,
-    bg: theming.blockAccent,
+    bg: '#061a2bb6', // previously theming.blockAccent but erb doesn't seem to handle that very well
   };
 
   constructor(props: Props) {
@@ -88,8 +90,18 @@ class Chart extends React.Component<Props, State> {
   }
 
   render() {
-    const { data, width, height, margin, showPoints, area, scaleYMax, bg } =
-      this.props;
+    const {
+      data,
+      width,
+      height,
+      margin,
+      showPoints,
+      area,
+      scaleYMax,
+      bg,
+      title,
+      subtitle,
+    } = this.props;
 
     const { isHovered, dynamicScale } = this.state;
 
@@ -154,6 +166,7 @@ class Chart extends React.Component<Props, State> {
                         strokeWidth={series.style.strokeWidth}
                         strokeOpacity={series.style.strokeOpacity}
                         shapeRendering={series.style.shapeRendering}
+                        // eslint-disable-next-line react/no-array-index-key
                         key={`linepath-${i}`} // this needs to be changed to something unique, copilot is sometimes an idiot
                       />
                     </>
@@ -167,6 +180,7 @@ class Chart extends React.Component<Props, State> {
                     strokeWidth={series.style.strokeWidth}
                     strokeOpacity={series.style.strokeOpacity}
                     shapeRendering={series.style.shapeRendering}
+                    // eslint-disable-next-line react/no-array-index-key
                     key={`linepath-${i}`} // this needs to be changed to something unique, copilot is sometimes an idiot
                   />
                 </>
@@ -182,6 +196,7 @@ class Chart extends React.Component<Props, State> {
                     fill={point.style.fill}
                     strokeWidth={point.style.strokeWidth}
                     strokeOpacity={point.style.strokeOpacity}
+                    // eslint-disable-next-line react/no-array-index-key
                     key={`point-${i}-${j}`} // this needs to be changed to something unique, copilot is sometimes an idiot
                   />
                 ))
@@ -204,8 +219,8 @@ class Chart extends React.Component<Props, State> {
         </ScaleSVG>
         <div className="chart-banner">
           <div className="chart-title">
-            <h2 style={{ color: '#fff' }}>{this.props.title}</h2>
-            <h3>{this.props.subtitle}</h3>
+            <h2 style={{ color: '#fff' }}>{title}</h2>
+            <h3>{subtitle}</h3>
           </div>
           <div className="chart-options">
             <CSSTransition
