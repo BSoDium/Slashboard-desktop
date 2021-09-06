@@ -125,4 +125,4 @@ class ServerStats extends React.Component<any, State> {
   }
 }
 
-export default ServerStats;
+export default withRouter(ServerStats);
