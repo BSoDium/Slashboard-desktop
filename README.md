@@ -6,13 +6,13 @@ Built on Electron and React.
 
 ## Server list
 
-![ServerList](assets\screenshots\ServerList.png)
+![ServerList](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/ServerList.png)
 
 ## Dashboard
 
-![Dashboard_upper](assets\screenshots\Dashboard_upper.png)
+![Dashboard_upper](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/Dashboard_upper.png)
 
-![Dashboard_lower](assets\screenshots\Dashboard_lower.png)
+![Dashboard_lower](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/Dashboard_lower.png)
 
 ## Installation
 
