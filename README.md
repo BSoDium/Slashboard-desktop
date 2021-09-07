@@ -1,4 +1,6 @@
-# Slashboard-desktop
+# Slashboard desktop client
+
+<img src="https://raw.githubusercontent.com/l3alr0g/Slashboard-desktop/electron/react/assets/icon.png" alt="Logo" width="100" align="left" />
 
 A simple and convenient way to monitor the activity and performance of your servers.
 
@@ -6,13 +8,13 @@ Built on Electron and React.
 
 ## Server list
 
-![ServerList](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/ServerList.png)
+![ServerList](https://raw.githubusercontent.com/l3alr0g/Slashboard-desktop/main/assets/screenshots/ServerList.png)
 
 ## Dashboard
 
-![Dashboard_upper](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/Dashboard_upper.png)
+![Dashboard_upper](https://raw.githubusercontent.com/l3alr0g/Slashboard-desktop/main/assets/screenshots/Dashboard_upper.png)
 
-![Dashboard_lower](https://github.com/l3alr0g/Slashboard-desktop/blob/electron/react/assets/screenshots/Dashboard_lower.png)
+![Dashboard_lower](https://raw.githubusercontent.com/l3alr0g/Slashboard-desktop/main/assets/screenshots/Dashboard_lower.png)
 
 ## Installation
 
