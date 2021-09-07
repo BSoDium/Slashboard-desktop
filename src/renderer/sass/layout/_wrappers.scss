@@ -12,6 +12,7 @@
 
 .titlebar-wrapper {
   box-sizing: border-box;
+  z-index: 1;
   height: 22px;
   width: 100%;
   background-color: theming.$titlebar-bg;
