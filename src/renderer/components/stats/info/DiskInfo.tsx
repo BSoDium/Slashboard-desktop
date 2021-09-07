@@ -14,10 +14,10 @@ const diskBlockSize: { [key: string]: number } = {
 };
 
 const fsExclude: RegExp[] = [
-  /tmpfs/gm,
-  /udev/gm,
-  /overlay/gm,
-  /\/dev\/loop[0-9]+/gm,
+  /tmpfs/im,
+  /udev/im,
+  /overlay/im,
+  /\/dev\/loop[0-9]+/im,
 ];
 
 interface Props {
@@ -95,23 +95,21 @@ export default class DiskInfo extends React.Component<Props, State> {
         </div>
         <div className="explorer" style={{ maxHeight: '510px' }}>
           {disks.map(
-            (
-              disk: {
-                _filesystem: string;
-                _blocks: number;
-                _used: number;
-                _available: number;
-                _capacity: string;
-                _mounted: string;
-              },
-              index
-            ) => {
+            (disk: {
+              _filesystem: string;
+              _blocks: number;
+              _used: number;
+              _available: number;
+              _capacity: string;
+              _mounted: string;
+            }) => {
               if (
                 excludeVolatileDisks &&
-                fsExclude.some((regex) => regex.test(disk._filesystem))
+                fsExclude.some((regex) => disk._filesystem.match(regex))
               ) {
                 return null;
               }
+              console.debug('');
               return (
                 <div key={disk._mounted} className="explorer-item-large">
                   <FontAwesomeIcon icon={faHdd} size="2x" />
