@@ -15,6 +15,7 @@ import { faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import SelectType from 'renderer/components/modals/SelectType';
 import { ActionMeta, ValueType } from 'react-select';
 import ServerList from 'renderer/containers/ServerList';
+import SpellCheck from 'renderer/utils/SpellCheck';
 
 interface Props {
   token: HandlerToken;
@@ -22,6 +23,7 @@ interface Props {
 
 interface State {
   showHelp: boolean;
+  showInvalidWarning: boolean;
   ip: string;
   port: string;
   auth: string;
@@ -39,6 +41,7 @@ class AddDeviceModal extends React.Component<Props, State> {
     super(props);
     this.state = {
       showHelp: false,
+      showInvalidWarning: false,
       ip: '',
       port: '',
       auth: '',
@@ -73,7 +76,7 @@ class AddDeviceModal extends React.Component<Props, State> {
 
   render() {
     const { token } = this.props;
-    const { showHelp, ip, port, auth, type } = this.state;
+    const { showHelp, showInvalidWarning, ip, port, auth, type } = this.state;
     return (
       <Modal height="fit-content" width="500px">
         <ModalHeader
@@ -151,6 +154,20 @@ class AddDeviceModal extends React.Component<Props, State> {
               onChange={this.handleSelectChange}
             />
           </div>
+          <div
+            className="tag t-error"
+            style={{
+              display: showInvalidWarning ? 'block' : 'none',
+              transition: 'all 0.3s ease-in-out',
+            }}
+          >
+            <div className="h-bold h-primary">
+              Sorry, some of the fields are incorrect
+            </div>
+            <div className="h-secondary" style={{ marginTop: '10px' }}>
+              Please check your input and try again.
+            </div>
+          </div>
         </ModalBody>
         <ModalFooter>
           <div className="button-band">
@@ -169,17 +186,26 @@ class AddDeviceModal extends React.Component<Props, State> {
               type="submit"
               className="btn-standard b-primary b-shadow"
               onClick={() => {
-                // ipcRenderer bridge
-                window.electron.ipcRenderer.storage.addServer(
-                  ip,
-                  port,
-                  auth,
-                  type
-                );
-                // close modal
-                ModalHandler.disable(token);
-                // update server list
-                (token.emitter as ServerList).fetch();
+                const validIp = SpellCheck.check('ip', ip);
+                const validPort = SpellCheck.check('port', port);
+                const validAuth = SpellCheck.check('auth', auth);
+                const validType = SpellCheck.check('type', type);
+
+                if (validIp && validPort && validAuth && validType) {
+                  // ipcRenderer bridge
+                  window.electron.ipcRenderer.storage.addServer(
+                    ip,
+                    port,
+                    auth,
+                    type
+                  );
+                  // close modal
+                  ModalHandler.disable(token);
+                  // update server list
+                  (token.emitter as ServerList).fetch();
+                } else {
+                  this.setState({ showInvalidWarning: true });
+                }
               }}
             >
               Done

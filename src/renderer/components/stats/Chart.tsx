@@ -240,6 +240,11 @@ class Chart extends React.Component<Props, State> {
                 }}
                 defaultValue={dynamicScale}
               />
+              {/* <FontAwesomeIcon
+                icon={faDraftingCompass}
+                size="lg"
+                className="chart-option-dynamic"
+              /> */}
             </CSSTransition>
           </div>
         </div>

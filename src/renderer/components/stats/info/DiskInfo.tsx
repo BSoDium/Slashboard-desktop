@@ -54,7 +54,7 @@ export default class DiskInfo extends React.Component<Props, State> {
                 (a, disk) =>
                   a +
                   (excludeVolatileDisks &&
-                  fsExclude.some((regex) => regex.test(disk._filesystem))
+                  fsExclude.some((regex) => disk._filesystem.match(regex))
                     ? 0
                     : 1),
                 0
@@ -69,7 +69,7 @@ export default class DiskInfo extends React.Component<Props, State> {
                   (a, disk) =>
                     a +
                     (excludeVolatileDisks &&
-                    fsExclude.some((regex) => regex.test(disk._filesystem))
+                    fsExclude.some((regex) => disk._filesystem.match(regex))
                       ? 0
                       : disk._blocks * diskBlockSize[os.platform]),
                   0
@@ -109,7 +109,6 @@ export default class DiskInfo extends React.Component<Props, State> {
               ) {
                 return null;
               }
-              console.debug('');
               return (
                 <div key={disk._mounted} className="explorer-item-large">
                   <FontAwesomeIcon icon={faHdd} size="2x" />
