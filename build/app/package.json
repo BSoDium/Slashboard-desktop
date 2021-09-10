@@ -1,7 +1,7 @@
 {
   "name": "slashboard",
   "productName": "Slashboard",
-  "version": "0.9.1",
+  "version": "1.0.2",
   "description": "Electron app to monitor personal server statuses in real time",
   "main": "./dist/main/main.js",
   "author": {
