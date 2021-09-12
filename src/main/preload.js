@@ -27,6 +27,34 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.send('editServer', id, ip, port, auth, type);
       },
     },
+    settings: {
+      getAll() {
+        return ipcRenderer.invoke('getAllSettings');
+      },
+      get(key) {
+        return ipcRenderer.invoke('getSetting', key);
+      },
+      setAll(settings) {
+        ipcRenderer.send('setAllSettings', settings);
+      },
+      set(key, value) {
+        ipcRenderer.send('setSetting', key, value);
+      },
+    },
+    preferences: {
+      getAll() {
+        return ipcRenderer.invoke('getAllPreferences');
+      },
+      get(key) {
+        return ipcRenderer.invoke('getPreference', key);
+      },
+      setAll(preferences) {
+        ipcRenderer.send('setAllPreferences', preferences);
+      },
+      set(key, value) {
+        ipcRenderer.send('setPreference', key, value);
+      },
+    },
     myPing() {
       ipcRenderer.send('ipc-example', 'ping');
     },

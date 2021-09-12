@@ -29,6 +29,18 @@ declare global {
             type: string
           ) => void;
         };
+        settings: {
+          getAll: () => Promise<any>;
+          get: (key: string) => Promise<any>;
+          setAll: (settings: any) => void;
+          set: (key: string, value: any) => void;
+        };
+        preferences: {
+          getAll: () => Promise<any>;
+          get: (key: string) => Promise<any>;
+          setAll: (settings: any) => void;
+          set: (key: string, value: any) => void;
+        };
         getVersion: () => Promise<any>;
       };
     };

@@ -93,6 +93,38 @@ ipcMain.handle('getAppVersion', () => {
   return app.getVersion();
 });
 
+ipcMain.on('setSetting', (_, key, value) => {
+  store.set(`internals.settings.${key}`, value);
+});
+
+ipcMain.on('setAllSettings', (_, settings) => {
+  store.set('internals.settings', settings);
+});
+
+ipcMain.handle('getSetting', (_, key) => {
+  return store.get(`internals.settings.${key}`);
+});
+
+ipcMain.handle('getAllSettings', () => {
+  return store.get('internals.settings');
+});
+
+ipcMain.on('setPreference', (_, key, value) => {
+  store.set(`internals.preferences.${key}`, value);
+});
+
+ipcMain.handle('setAllPreferences', (_, preferences) => {
+  store.set('internals.preferences', preferences);
+});
+
+ipcMain.handle('getPreference', (_, key) => {
+  store.get(`internals.preferences.${key}`);
+});
+
+ipcMain.handle('getAllPreferences', () => {
+  return store.get('internals.preferences');
+});
+
 if (process.env.NODE_ENV === 'production') {
   const sourceMapSupport = require('source-map-support');
   sourceMapSupport.install();

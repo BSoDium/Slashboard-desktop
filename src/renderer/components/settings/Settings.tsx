@@ -34,4 +34,51 @@ SettingSwitch.defaultProps = {
   state: undefined,
 };
 
-export default SettingSwitch;
+const SettingCategory = (props: {
+  title: string;
+  children?: React.ReactNode;
+}) => {
+  const { title, children } = props;
+
+  return (
+    <div className="setting-category">
+      <div className="title-box">
+        <h2 className="h-bold h-primary">{title}</h2>
+      </div>
+      {children}
+    </div>
+  );
+};
+
+SettingCategory.defaultProps = {
+  children: undefined,
+};
+
+const SubSettingCategory = (props: {
+  title: string;
+  children?: React.ReactNode;
+}) => {
+  const { title, children } = props;
+
+  return (
+    <div className="sub-setting-category">
+      <div
+        className="title-box"
+        style={{
+          padding: '5px 0px',
+          marginBlockEnd: '20px',
+          borderBottom: '1px solid #525366',
+        }}
+      >
+        <h3 className="h-bold">{title}</h3>
+      </div>
+      {children}
+    </div>
+  );
+};
+
+SubSettingCategory.defaultProps = {
+  children: undefined,
+};
+
+export { SettingSwitch, SettingCategory, SubSettingCategory };
