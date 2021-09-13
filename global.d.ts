@@ -1,3 +1,5 @@
+import { ValueOf } from '@visx/scale';
+
 declare global {
   interface CompactState {
     value: any;
@@ -12,16 +14,11 @@ declare global {
           maximize: () => void;
           close: () => void;
         };
-        storage: {
-          getServers: () => Promise<any>;
-          addServer: (
-            ip: string,
-            port: string,
-            auth: string,
-            type: string
-          ) => void;
-          delServer: (id: string) => void;
-          editServer: (
+        servers: {
+          getAll: () => Promise<StorageFormat['servers']>;
+          add: (ip: string, port: string, auth: string, type: string) => void;
+          del: (id: string) => void;
+          edit: (
             id: string,
             ip: string,
             port: string,
@@ -29,7 +26,31 @@ declare global {
             type: string
           ) => void;
         };
-        getVersion: () => Promise<any>;
+        settings: {
+          getAll: () => Promise<StorageFormat['internals']['settings']>;
+          get: (
+            key: string
+          ) => Promise<ValueOf<StorageFormat['internals']['settings']>>;
+          setAll: (settings: StorageFormat['internals']['settings']) => void;
+          set: (
+            key: string,
+            value: ValueOf<StorageFormat['internals']['settings']>
+          ) => void;
+        };
+        preferences: {
+          getAll: () => Promise<StorageFormat['internals']['preferences']>;
+          get: (
+            key: string
+          ) => Promise<ValueOf<StorageFormat['internals']['preferences']>>;
+          setAll: (
+            preferences: StorageFormat['internals']['preferences']
+          ) => void;
+          set: (
+            key: string,
+            value: ValueOf<StorageFormat['internals']['preferences']>
+          ) => void;
+        };
+        getVersion: () => Promise<string>;
       };
     };
   }
@@ -99,6 +120,19 @@ declare global {
         architechture: string;
         release: string;
       };
+    };
+  }
+
+  interface StorageFormat {
+    servers: Record<
+      string,
+      { ip: string; port: string; auth: string; type: string }
+    >;
+    internals: {
+      settings: {
+        dynamicScale: boolean;
+      };
+      preferences: Record<string, number | boolean | string>;
     };
   }
 }

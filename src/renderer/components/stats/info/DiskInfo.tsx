@@ -5,7 +5,7 @@ import hdd from 'renderer/assets/hardware/hdd.svg'; // Smashicons
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHdd } from '@fortawesome/free-solid-svg-icons';
 
-import SettingSwitch from 'renderer/components/settings/Settings';
+import { SettingSwitch } from 'renderer/components/settings/Settings';
 
 const diskBlockSize: { [key: string]: number } = {
   win32: 1, // just windows being a stupid

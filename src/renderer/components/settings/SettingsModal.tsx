@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import Modal from 'renderer/components/modals/Modal';
 import ModalHeader from 'renderer/components/modals/ModalHeader';
@@ -9,73 +9,92 @@ import {
   HandlerToken,
 } from 'renderer/components/modals/ModalHandler';
 
-import SettingSwitch from 'renderer/components/settings/Settings';
+import {
+  SettingSwitch,
+  SubSettingCategory,
+} from 'renderer/components/settings/Settings';
+import Storage from 'renderer/utils/Storage';
 
 interface Props {
   token: HandlerToken;
 }
 
 const SettingsModal = ({ token }: Props) => {
+  const [settings, setSettings] = useState(undefined as any);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchSettings = async () => {
+      const data = await window.electron.ipcRenderer.settings.getAll();
+      setSettings(data);
+      setIsLoading(false);
+    };
+
+    fetchSettings();
+  }, []);
+
   return (
-    <Modal height="fit-content" width="600px">
-      <ModalHeader
-        style={{ padding: '15px 0px 15px 20px', background: '#0e3455' }}
-      >
-        <h2 className="h-normal h-primary">Settings</h2>
-      </ModalHeader>
-      <ModalBody
-        style={{
-          padding: '20px',
-          color: '#fff',
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <h2 style={{ paddingBottom: '10px' }}>
-          Sorry, there aren&apos;t any customizable things yet
-        </h2>
-        <h3 style={{ paddingBottom: '20px' }}>
-          but here&apos;s a quick demo of what this panel might look like in the
-          future
-        </h3>
-        <SettingSwitch
-          text="Load configuration from file"
-          subtext="Regularly save configuration to a json file and load it on
-                startup"
-        />
-        <SettingSwitch
-          text="Celebrate"
-          subtext="Go haywire from time to time"
-        />
-      </ModalBody>
-      <ModalFooter>
-        <div className="button-band">
-          <button
-            type="button"
-            className="btn-empty b-normal"
-            onClick={() => {
-              // close modal
-              ModalHandler.disable(token);
-            }}
-            style={{ marginRight: '10px' }}
+    <div>
+      {isLoading ? null : (
+        <Modal height="fit-content" width="600px">
+          <ModalHeader
+            style={{ padding: '15px 0px 15px 20px', background: '#0e3455' }}
           >
-            Cancel
-          </button>
-          <button
-            type="submit"
-            className="btn-standard b-primary b-shadow"
-            onClick={() => {
-              // ipcRenderer bridge
-              // window.electron.ipcRenderer.storage.doSomething();
-              // close modal
-              ModalHandler.disable(token);
+            <h2 className="h-normal h-primary">Settings</h2>
+          </ModalHeader>
+          <ModalBody
+            style={{
+              padding: '20px',
+              color: '#fff',
             }}
           >
-            Save
-          </button>
-        </div>
-      </ModalFooter>
-    </Modal>
+            <SubSettingCategory title="Dashboard charts">
+              <SettingSwitch
+                text="Dynamic scale"
+                subtext="The chart's scale adapts dynamically to the data it displays"
+                state={{
+                  value: settings.dynamicScale,
+                  setter: (value) => {
+                    settings.dynamicScale = value;
+                    setSettings(settings);
+                  },
+                }}
+                defaultValue={settings.dynamicScale}
+              />
+            </SubSettingCategory>
+          </ModalBody>
+          <ModalFooter>
+            <div className="button-band">
+              <button
+                type="button"
+                className="btn-empty b-normal"
+                onClick={() => {
+                  // close modal
+                  ModalHandler.disable(token);
+                }}
+                style={{ marginRight: '10px' }}
+              >
+                Cancel
+              </button>
+              <button
+                type="submit"
+                className="btn-standard b-primary b-shadow"
+                onClick={() => {
+                  // ipcRenderer bridge
+                  window.electron.ipcRenderer.settings.setAll(settings);
+                  // update internals in Storage
+                  Storage.updateInternals();
+                  // close modal
+                  ModalHandler.disable(token);
+                }}
+              >
+                Save
+              </button>
+            </div>
+          </ModalFooter>
+        </Modal>
+      )}
+    </div>
   );
 };
 

@@ -53,7 +53,7 @@ const DelDeviceModal = ({ token }: Props) => {
             onClick={() => {
               const emitter = token.emitter as Server;
               // ipcRenderer bridge
-              window.electron.ipcRenderer.storage.delServer(emitter.getId());
+              window.electron.ipcRenderer.servers.del(emitter.getId());
               // close modal
               ModalHandler.disable(token);
               // update server list
