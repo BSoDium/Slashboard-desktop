@@ -5,23 +5,26 @@ import Window from 'renderer/containers/Window';
 import Login from 'renderer/components/Login';
 import HomePage from 'renderer/containers/HomePage';
 import Dashboard from 'renderer/containers/Dashboard';
-import ControlPanel from 'renderer/containers/ControlPanel';
-import IOT from 'renderer/containers/IOT';
-import Logs from 'renderer/containers/Logs';
+import ControlPanel from 'renderer/containers/tabs/ControlPanel';
+import IOT from 'renderer/containers/tabs/IOT';
+import Logs from 'renderer/containers/tabs/Logs';
 import ServerStats from 'renderer/components/stats/ServerStats';
 
 import 'renderer/App.global.scss';
+import Storage from './utils/Storage';
 
 interface State {
   offlineMode: boolean;
 }
 
-class App extends React.Component<any, State> {
-  constructor(props: any) {
+class App extends React.Component<Record<string, never>, State> {
+  constructor(props: Record<string, never>) {
     super(props);
     this.state = {
       offlineMode: false,
     };
+    Storage.updateInternals();
+    Storage.updateServers();
   }
 
   render() {
@@ -53,6 +56,7 @@ class App extends React.Component<any, State> {
                       this.setState({ offlineMode: value });
                     },
                   }}
+                  name="ControlPanel"
                 />
               </Dashboard>
             </Window>
@@ -61,7 +65,7 @@ class App extends React.Component<any, State> {
           <Route path="/dashboard/iot">
             <Window>
               <Dashboard>
-                <IOT />
+                <IOT name="IOT" />
               </Dashboard>
             </Window>
           </Route>
@@ -69,7 +73,7 @@ class App extends React.Component<any, State> {
           <Route path="/dashboard/logs">
             <Window>
               <Dashboard>
-                <Logs />
+                <Logs name="Logs" />
               </Dashboard>
             </Window>
           </Route>

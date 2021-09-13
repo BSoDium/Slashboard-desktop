@@ -16,13 +16,14 @@ import {
   EmptyDashboard,
   NoInternet,
 } from 'renderer/components/ContextMessages';
+import Storage from 'renderer/utils/Storage';
 
 interface Props {
   offline: CompactState;
 }
 
 interface State {
-  servers: any[];
+  servers: StorageFormat['servers'] | never[];
   lastUpdated: Date;
   timeSinceLastUpdate: string;
   isLoading: boolean;
@@ -53,7 +54,6 @@ class ServerList extends React.Component<Props, State> {
     this.fetch();
     // update "Last fetched :" text and server list every 5000 ms
     this.interval = setInterval(async () => {
-      this.fetch();
       const { lastUpdated } = this.state;
       this.setState({
         timeSinceLastUpdate: moment(lastUpdated).fromNow(),
@@ -66,9 +66,15 @@ class ServerList extends React.Component<Props, State> {
     clearInterval(this.interval);
   }
 
-  async fetch() {
-    const servers = await window.electron.ipcRenderer.storage.getServers();
-    this.setState({ servers, isLoading: false });
+  fetch() {
+    Storage.updateServers(() => {
+      this.setState({
+        servers: Storage.servers,
+        lastUpdated: new Date(),
+        timeSinceLastUpdate: 'now',
+        isLoading: false,
+      });
+    });
   }
 
   render() {
@@ -107,10 +113,7 @@ class ServerList extends React.Component<Props, State> {
                   type="button"
                   className="btn-flat"
                   onClick={() => {
-                    this.setState({
-                      lastUpdated: new Date(),
-                      timeSinceLastUpdate: 'now',
-                    });
+                    this.fetch();
                   }}
                 >
                   <FontAwesomeIcon

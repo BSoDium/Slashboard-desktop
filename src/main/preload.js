@@ -13,17 +13,17 @@ contextBridge.exposeInMainWorld('electron', {
         ipcRenderer.send('close');
       },
     },
-    storage: {
-      getServers() {
+    servers: {
+      getAll() {
         return ipcRenderer.invoke('getServers');
       },
-      addServer(ip, port, auth, type) {
+      add(ip, port, auth, type) {
         ipcRenderer.send('addServer', ip, port, auth, type);
       },
-      delServer(id) {
+      del(id) {
         ipcRenderer.send('delServer', id);
       },
-      editServer(id, ip, port, auth, type) {
+      edit(id, ip, port, auth, type) {
         ipcRenderer.send('editServer', id, ip, port, auth, type);
       },
     },

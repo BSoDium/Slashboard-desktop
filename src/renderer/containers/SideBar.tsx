@@ -59,7 +59,7 @@ const SideBarButton = ({
       role="button"
       tabIndex={0}
       style={
-        tab.type.name === componentName // this doesn't seem to work in the packaged app
+        tab.props.name === componentName // this doesn't seem to work in the packaged app
           ? {
               backgroundColor: 'rgba(40, 57, 95, 0.397)', // theming.sidebarTabActiveBg
             }

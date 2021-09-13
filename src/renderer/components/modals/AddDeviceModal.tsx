@@ -193,12 +193,7 @@ class AddDeviceModal extends React.Component<Props, State> {
 
                 if (validIp && validPort && validAuth && validType) {
                   // ipcRenderer bridge
-                  window.electron.ipcRenderer.storage.addServer(
-                    ip,
-                    port,
-                    auth,
-                    type
-                  );
+                  window.electron.ipcRenderer.servers.add(ip, port, auth, type);
                   // close modal
                   ModalHandler.disable(token);
                   // update server list

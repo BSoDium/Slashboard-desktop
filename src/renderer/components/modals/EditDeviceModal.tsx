@@ -208,7 +208,7 @@ class EditDeviceModal extends React.Component<Props, State> {
                 if (validIp && validPort && validAuth && validType) {
                   const emitter = token.emitter as Server;
                   // ipcRenderer bridge
-                  window.electron.ipcRenderer.storage.editServer(
+                  window.electron.ipcRenderer.servers.edit(
                     emitter.getId(),
                     ip,
                     port,

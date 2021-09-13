@@ -1,6 +1,6 @@
 import React from 'react';
 
-const IOT = () => {
+const IOT = ({ name }: { name: string }) => {
   return (
     <div className="body-wrapper">
       <div className="body-panel-wrapper">

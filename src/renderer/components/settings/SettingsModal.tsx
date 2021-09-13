@@ -13,6 +13,7 @@ import {
   SettingSwitch,
   SubSettingCategory,
 } from 'renderer/components/settings/Settings';
+import Storage from 'renderer/utils/Storage';
 
 interface Props {
   token: HandlerToken;
@@ -52,13 +53,13 @@ const SettingsModal = ({ token }: Props) => {
                 text="Dynamic scale"
                 subtext="The chart's scale adapts dynamically to the data it displays"
                 state={{
-                  value: settings.dynamicState,
+                  value: settings.dynamicScale,
                   setter: (value) => {
-                    settings.dynamicState = value;
+                    settings.dynamicScale = value;
                     setSettings(settings);
                   },
                 }}
-                defaultValue={settings.dynamicState}
+                defaultValue={settings.dynamicScale}
               />
             </SubSettingCategory>
           </ModalBody>
@@ -81,6 +82,8 @@ const SettingsModal = ({ token }: Props) => {
                 onClick={() => {
                   // ipcRenderer bridge
                   window.electron.ipcRenderer.settings.setAll(settings);
+                  // update internals in Storage
+                  Storage.updateInternals();
                   // close modal
                   ModalHandler.disable(token);
                 }}

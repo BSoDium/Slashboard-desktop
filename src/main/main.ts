@@ -34,7 +34,9 @@ if (!store.has('servers')) {
   store.set({
     servers: {},
     internals: {
-      settings: {},
+      settings: {
+        dynamicScale: true,
+      },
       preferences: {},
     },
   });
