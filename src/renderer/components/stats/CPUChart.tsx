@@ -5,6 +5,7 @@ import { Chart, Point, Line } from 'renderer/components/stats/Chart';
 import defaultStyles from 'renderer/components/stats/ChartStyles';
 import OWStack from 'renderer/utils/OWStack';
 import ColorGen from 'renderer/utils/ColorGen';
+import Storage from 'renderer/utils/Storage';
 
 interface Props {
   coreStates: Array<{
@@ -56,6 +57,7 @@ class CPUChart extends React.Component<Props, State> {
   render() {
     const { coreStates, title, subtitle, stroke } = this.props;
     const { areaChart } = this.state;
+    const { dynamicCPUScale } = Storage.internals.settings;
 
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
@@ -72,7 +74,7 @@ class CPUChart extends React.Component<Props, State> {
         data: this.data[i].toArray(),
         style: {
           cursor: 'auto',
-          stroke: stroke || ColorGen.generate(i),
+          stroke: stroke || ColorGen.generate(i, [9, 31, 47]),
           strokeWidth: 2,
           strokeOpacity: 1,
           shapeRendering: 'geometricPrecision',
@@ -93,6 +95,7 @@ class CPUChart extends React.Component<Props, State> {
                 area={areaChart}
                 title={title}
                 subtitle={subtitle}
+                dynamicScale={dynamicCPUScale}
               />
             );
           }}

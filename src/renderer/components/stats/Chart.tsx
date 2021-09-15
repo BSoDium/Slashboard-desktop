@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 /* eslint-disable react/static-property-placement */
-import React, { useState } from 'react';
+import React from 'react';
 
 import { curveBasis } from '@visx/curve';
 import { AreaClosed, LinePath } from '@visx/shape';
@@ -11,7 +11,6 @@ import { Group } from '@visx/group';
 import { scaleTime, scaleLinear } from '@visx/scale';
 import { LinearGradient } from '@visx/gradient';
 import { extent, max } from 'd3-array';
-import Storage from 'renderer/utils/Storage';
 
 interface Point {
   value: number;
@@ -58,6 +57,7 @@ interface Props {
   bg?: string;
   title?: string;
   subtitle?: string;
+  dynamicScale?: boolean;
 }
 
 const Chart = ({
@@ -71,9 +71,8 @@ const Chart = ({
   bg,
   title,
   subtitle,
+  dynamicScale,
 }: Props) => {
-  const { dynamicScale } = Storage.internals.settings;
-
   const allData = data
     .map((value) => value.data)
     .reduce((acc, curr) => acc.concat(curr), []);
@@ -201,6 +200,7 @@ Chart.defaultProps = {
   showPoints: false,
   area: false,
   bg: '#061a2bb6', // previously theming.blockAccent but erb doesn't seem to handle that very well
+  dynamicScale: false,
 };
 
 export default Chart;

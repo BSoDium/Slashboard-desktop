@@ -4,6 +4,7 @@ class Storage {
   static servers: StorageFormat['servers'];
 
   static updateInternals(callback?: () => void) {
+    console.debug('Updating internals');
     const fetch = async () => {
       Storage.internals = await Promise.all([
         window.electron.ipcRenderer.settings.getAll(),
@@ -21,6 +22,7 @@ class Storage {
   }
 
   static updateServers(callback?: () => void) {
+    console.debug('Updating server list');
     const fetch = async () => {
       Storage.servers = await window.electron.ipcRenderer.servers.getAll();
       callback?.();

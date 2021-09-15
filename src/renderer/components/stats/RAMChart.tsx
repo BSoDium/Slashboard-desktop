@@ -4,6 +4,7 @@ import { ParentSize } from '@visx/responsive';
 import { Chart, Point, Line } from 'renderer/components/stats/Chart';
 import defaultStyles from 'renderer/components/stats/ChartStyles';
 import OWStack from 'renderer/utils/OWStack';
+import Storage from 'renderer/utils/Storage';
 
 interface Props {
   memoryState: {
@@ -38,6 +39,7 @@ class RAMChart extends React.Component<Props, unknown> {
 
   render() {
     const { memoryState, stroke } = this.props;
+    const { dynamicRAMScale } = Storage.internals.settings;
 
     // convert the Array of stacks to an array of Lines
     const arrayData = new Array<Line>();
@@ -71,6 +73,7 @@ class RAMChart extends React.Component<Props, unknown> {
                 area
                 title="RAM"
                 subtitle="Memory usage"
+                dynamicScale={dynamicRAMScale}
               />
             );
           }}
