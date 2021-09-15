@@ -130,7 +130,8 @@ declare global {
     >;
     internals: {
       settings: {
-        dynamicScale: boolean;
+        dynamicCPUScale: boolean;
+        dynamicRAMScale: boolean;
       };
       preferences: Record<string, number | boolean | string>;
     };

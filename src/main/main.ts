@@ -35,7 +35,8 @@ if (!store.has('servers')) {
     servers: {},
     internals: {
       settings: {
-        dynamicScale: true,
+        dynamicCPUScale: true,
+        dynamicRAMScale: false,
       },
       preferences: {},
     },

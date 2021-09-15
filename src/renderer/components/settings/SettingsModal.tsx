@@ -12,6 +12,7 @@ import {
 import {
   SettingSwitch,
   SubSettingCategory,
+  SettingCategory,
 } from 'renderer/components/settings/Settings';
 import Storage from 'renderer/utils/Storage';
 
@@ -20,7 +21,9 @@ interface Props {
 }
 
 const SettingsModal = ({ token }: Props) => {
-  const [settings, setSettings] = useState(undefined as any);
+  const [settings, setSettings] = useState<
+    undefined | StorageFormat['internals']['settings']
+  >(undefined);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
@@ -48,20 +51,40 @@ const SettingsModal = ({ token }: Props) => {
               color: '#fff',
             }}
           >
-            <SubSettingCategory title="Dashboard charts">
-              <SettingSwitch
-                text="Dynamic scale"
-                subtext="The chart's scale adapts dynamically to the data it displays"
-                state={{
-                  value: settings.dynamicScale,
-                  setter: (value) => {
-                    settings.dynamicScale = value;
-                    setSettings(settings);
-                  },
-                }}
-                defaultValue={settings.dynamicScale}
-              />
-            </SubSettingCategory>
+            <SettingCategory title="Dashboard charts">
+              <SubSettingCategory title="CPU">
+                <SettingSwitch
+                  text="Dynamic chart scale"
+                  subtext="The chart's scale adapts dynamically to the data it displays"
+                  state={{
+                    value: settings?.dynamicCPUScale,
+                    setter: (value) => {
+                      if (settings) {
+                        settings.dynamicCPUScale = value;
+                        setSettings(settings);
+                      }
+                    },
+                  }}
+                  defaultValue={settings?.dynamicCPUScale}
+                />
+              </SubSettingCategory>
+              <SubSettingCategory title="RAM">
+                <SettingSwitch
+                  text="Dynamic chart scale"
+                  subtext="Same thing as above, looks wrong most of the time due how slowly the memory usage varies"
+                  state={{
+                    value: settings?.dynamicRAMScale,
+                    setter: (value) => {
+                      if (settings) {
+                        settings.dynamicRAMScale = value;
+                        setSettings(settings);
+                      }
+                    },
+                  }}
+                  defaultValue={settings?.dynamicRAMScale}
+                />
+              </SubSettingCategory>
+            </SettingCategory>
           </ModalBody>
           <ModalFooter>
             <div className="button-band">
@@ -81,7 +104,9 @@ const SettingsModal = ({ token }: Props) => {
                 className="btn-standard b-primary b-shadow"
                 onClick={() => {
                   // ipcRenderer bridge
-                  window.electron.ipcRenderer.settings.setAll(settings);
+                  if (settings) {
+                    window.electron.ipcRenderer.settings.setAll(settings);
+                  }
                   // update internals in Storage
                   Storage.updateInternals();
                   // close modal

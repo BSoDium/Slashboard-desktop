@@ -42,7 +42,13 @@ const SettingCategory = (props: {
 
   return (
     <div className="setting-category">
-      <div className="title-box">
+      <div
+        className="title-box"
+        style={{
+          padding: '5px 0px',
+          marginBlockEnd: '20px',
+        }}
+      >
         <h2 className="h-bold h-primary">{title}</h2>
       </div>
       {children}
@@ -65,14 +71,14 @@ const SubSettingCategory = (props: {
       <div
         className="title-box"
         style={{
-          padding: '5px 0px',
+          padding: '5px 0px 5px 5px',
           marginBlockEnd: '20px',
           borderBottom: '1px solid #525366',
         }}
       >
         <h3 className="h-bold">{title}</h3>
       </div>
-      {children}
+      <div style={{ marginLeft: '5px' }}>{children}</div>
     </div>
   );
 };

@@ -48,7 +48,6 @@ const SideBarButton = ({
   const handleClick = () => {
     if (!disabled) {
       const url = `/dashboard/${text.toLowerCase()}`;
-      // console.debug(url)
       history.push(url);
     }
   };
