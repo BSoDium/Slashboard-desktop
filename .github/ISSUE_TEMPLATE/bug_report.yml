@@ -35,7 +35,7 @@ body:
     id: version
     attributes:
       label: Version
-      description: What version of our Slashboard are you running?
+      description: What version of Slashboard are you running?
       placeholder: v1.0.0
     validations:
       required: true
