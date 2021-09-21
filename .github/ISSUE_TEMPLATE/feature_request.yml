@@ -17,7 +17,7 @@ body:
     id: describe
     attributes:
       label: Describe your idea
-      description: Be precise and explicit, provide screenshots if necessary.
+      description: Be precise and explicit, provide screenshots if necessary
       placeholder: I would like all icons to be green instead of grey
     validations:
       required: true
@@ -28,5 +28,5 @@ body:
       label: Code of Conduct
       description: By submitting this issue, you agree to follow our [Code of Conduct](https://example.com)
       options:
-        - label: I agree to follow this project's Code of Conduct
+        - label: I agree to follow Slashboard's Code of Conduct
           required: true
