@@ -8,6 +8,7 @@ import {
   faWifi,
   faLock,
   faHeartBroken,
+  faHandshakeSlash,
 } from '@fortawesome/free-solid-svg-icons';
 
 const EmptyDashboard = (props: { onClick: () => void }) => {
@@ -166,4 +167,47 @@ const Unresponsive = () => {
   );
 };
 
-export { EmptyDashboard, NoInternet, InvalidKey, Unresponsive };
+const InvalidAPI = () => {
+  return (
+    <div className="msg-wrapper">
+      <FontAwesomeIcon
+        icon={faHandshakeSlash}
+        size="8x"
+        color="#d4d4d4"
+        style={{ paddingBottom: '30px' }}
+      />
+      <h1>Woops...</h1>
+      <h2>Pulsar&apos;s API can&apos;t be read</h2>
+      <div className="tag t-dark" style={{ marginTop: '30px' }}>
+        <p style={{ fontWeight: 'bold' }}>
+          <FontAwesomeIcon
+            icon={faInfoCircle}
+            color="#d4d4d4"
+            style={{ paddingRight: '7px' }}
+          />
+          Troubleshooting :
+        </p>
+        <p>
+          This error is being displayed because the data returned by the server
+          does not match the client&apos;s expected format. This is usually due
+          to Pulsar being outdated.
+        </p>
+        <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
+          Try updating Pulsar, or downgrading the client to the latest
+          compatible version.
+        </p>
+      </div>
+      <Link to="/">
+        <button
+          type="button"
+          className="btn-standard b-dark b-shadow"
+          style={{ marginTop: '30px' }}
+        >
+          Go back
+        </button>
+      </Link>
+    </div>
+  );
+};
+
+export { EmptyDashboard, NoInternet, InvalidKey, Unresponsive, InvalidAPI };

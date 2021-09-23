@@ -115,22 +115,24 @@ class Server extends React.Component<Props, State> {
             textTransform: 'uppercase',
           }}
         >
-          {response.data.name}
+          {response.data?.name ? response.data.name : 'Unknown'}
         </div>
         <div>
           status :{' '}
           <span
             style={{
-              color: statusColorMap[response.data.status],
+              color: statusColorMap[response.data?.status]
+                ? statusColorMap[response.data.status]
+                : '#f55840',
               fontWeight: 'bold',
             }}
           >
-            {response.data.status}
+            {response.data?.status ? response.data.status : 'incompatible API'}
           </span>
         </div>
         <div>
           operating system :&nbsp;
-          {response.data.os ? (
+          {response.data?.os ? (
             <>
               {response.data.os.type}&nbsp;
               {response.data.os.architecture}&nbsp;build&nbsp;

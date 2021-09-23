@@ -8,7 +8,11 @@ import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
 import DeviceInfo from 'renderer/components/stats/info/DeviceInfo';
 
-import { InvalidKey, Unresponsive } from 'renderer/components/ContextMessages';
+import {
+  InvalidKey,
+  Unresponsive,
+  InvalidAPI,
+} from 'renderer/components/ContextMessages';
 
 interface State {
   isLoading: boolean;
@@ -63,7 +67,10 @@ class ServerStats extends React.Component<any, State> {
     const { isLoading, response, fetchFailed } = this.state;
     const serverTimedOut = isLoading ? undefined : fetchFailed;
     const authFailed =
-      !isLoading && !serverTimedOut && response?.data.status !== 'active';
+      !isLoading &&
+      !serverTimedOut &&
+      response?.data &&
+      response?.data.status !== 'active';
 
     let content: JSX.Element;
     if (serverTimedOut) {
@@ -75,45 +82,50 @@ class ServerStats extends React.Component<any, State> {
     } else if (!isLoading) {
       // response is readable, display stats
       const { ip, port } = match.params;
-      content = (
-        <div className="server-stats-wrapper">
-          <div className="server-stats-titlebar">
-            <div className="title-box">
-              <h1>{response?.data?.name}</h1>
-              <h2>
-                {ip}:{port}
-              </h2>
-            </div>
-          </div>
-          <div className="server-stats-content">
-            <DeviceInfo data={response?.data!} />
-            <div className="server-stats-charts">
-              <div className="chart-group">
-                <CPUChart
-                  coreStates={[response?.data.hardware.cpu.global!]}
-                  duration={50}
-                  title="CPU"
-                  subtitle="Average load"
-                  stroke="#2effff"
-                />
-                <CPUChart
-                  coreStates={response?.data.hardware.cpu.cores!}
-                  duration={50}
-                  title="CPU"
-                  subtitle="Core load"
-                />
-                <RAMChart // I need to somehow merge the memory and cpu charts into one component
-                  memoryState={response?.data?.hardware?.memory!}
-                  duration={50}
-                  stroke="#ff2e2e"
-                />
-                {/* <TempCharts /> */}
+      try {
+        content = (
+          <div className="server-stats-wrapper">
+            <div className="server-stats-titlebar">
+              <div className="title-box">
+                <h1>{response?.data.name}</h1>
+                <h2>
+                  {ip}:{port}
+                </h2>
               </div>
             </div>
-            {/* <Console /> */}
+            <div className="server-stats-content">
+              <DeviceInfo data={response?.data!} />
+              <div className="server-stats-charts">
+                <div className="chart-group">
+                  <CPUChart
+                    coreStates={[response?.data.hardware.cpu.global!]}
+                    duration={50}
+                    title="CPU"
+                    subtitle="Average load"
+                    stroke="#2effff"
+                  />
+                  <CPUChart
+                    coreStates={response?.data.hardware.cpu.cores!}
+                    duration={50}
+                    title="CPU"
+                    subtitle="Core load"
+                  />
+                  <RAMChart // I need to somehow merge the memory and cpu charts into one component
+                    memoryState={response?.data.hardware.memory!}
+                    duration={50}
+                    stroke="#ff2e2e"
+                  />
+                  {/* <TempCharts /> */}
+                </div>
+              </div>
+              {/* <Console /> */}
+            </div>
           </div>
-        </div>
-      );
+        );
+      } catch (e) {
+        // If the fields are missing, then the API is invalid
+        content = <InvalidAPI />;
+      }
     } else {
       content = <LoadingSpinner text="Fetching data" />;
     }
