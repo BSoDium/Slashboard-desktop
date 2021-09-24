@@ -49,7 +49,7 @@ const DelDeviceModal = ({ token }: Props) => {
           </button>
           <button
             type="submit"
-            className="btn-standard b-primary b-shadow"
+            className="btn-standard b-danger b-shadow"
             onClick={() => {
               const emitter = token.emitter as Server;
               // ipcRenderer bridge
@@ -60,7 +60,7 @@ const DelDeviceModal = ({ token }: Props) => {
               emitter.props.listRefresh();
             }}
           >
-            Yes
+            Delete
           </button>
         </div>
       </ModalFooter>

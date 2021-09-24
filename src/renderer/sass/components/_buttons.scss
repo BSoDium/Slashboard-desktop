@@ -34,6 +34,14 @@
   color: #2a3147;
 }
 
+.b-danger {
+  &:hover {
+    background-color: #aa2d24;
+  }
+  background-color: #c9372d;
+  color: #fff;
+}
+
 .b-dark {
   &:hover {
     background-color: #002499;

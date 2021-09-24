@@ -16,6 +16,7 @@ import {
 
 interface State {
   isLoading: boolean;
+  bearer: string;
   response: PulsarResponse | undefined;
   fetchFailed: boolean;
 }
@@ -27,6 +28,7 @@ class ServerStats extends React.Component<any, State> {
     super(props);
     this.state = {
       isLoading: true,
+      bearer: '',
       response: undefined,
       fetchFailed: false,
     };
@@ -36,7 +38,16 @@ class ServerStats extends React.Component<any, State> {
   componentDidMount() {
     // eslint-disable-next-line react/destructuring-assignment
     const { match } = this.props;
-    this.fetchData(match.params.ip, match.params.port, match.params.auth);
+    // fetch the bearer token, then fetch the data
+    this.fetchBearer(match.params.ip, match.params.port, match.params.auth)
+      .then(() => {
+        return this.fetchData(
+          match.params.ip,
+          match.params.port,
+          match.params.auth
+        );
+      })
+      .catch(() => {});
 
     this.interval = setInterval(() => {
       // eslint-disable-next-line react/destructuring-assignment
@@ -49,16 +60,51 @@ class ServerStats extends React.Component<any, State> {
     clearInterval(this.interval);
   }
 
-  fetchData(ip: string, port: string, auth: string) {
-    const url = `http://${ip}:${port}/${auth}/status`;
-    fetch(url)
+  async fetchData(ip: string, port: string, auth: string) {
+    const url = `http://${ip}:${port}/status`;
+    const { bearer } = this.state;
+
+    const options = {
+      method: 'GET',
+      headers: new Headers({ authorization: `Bearer ${bearer}` }),
+    };
+
+    return fetch(url, options)
       .then((response) => response.json())
-      .then((response: PulsarResponse) => {
+      .then((response) => {
+        if (response.data.status === 'access denied') {
+          this.fetchBearer(ip, port, auth);
+          return response;
+        }
         this.setState({ response, isLoading: false });
         return response;
       })
       .catch(() => {
         this.setState({ isLoading: false, fetchFailed: true });
+      });
+  }
+
+  /**
+   * Fetches the bearer token from the server.
+   */
+  async fetchBearer(ip: string, port: string, auth: string) {
+    const url = `http://${ip}:${port}/authenticate/jwt`;
+    const options = {
+      method: 'POST',
+      headers: new Headers({ 'content-type': 'application/json' }),
+      body: JSON.stringify({
+        auth,
+      }),
+    };
+
+    return fetch(url, options)
+      .then((response) => response.json())
+      .then((response) => {
+        this.setState({ bearer: response.bearer });
+        return response;
+      })
+      .catch(() => {
+        this.setState({ bearer: '' });
       });
   }
 
