@@ -23,6 +23,7 @@ import { faTrash, faPen, faSync } from '@fortawesome/free-solid-svg-icons';
 const statusColorMap: { [key: string]: string } = {
   active: '#00ff88',
   'access denied': 'rgb(226, 178, 19)',
+  'incompatible API': 'rgb(226, 178, 19)',
   down: '#ff001e',
 };
 
@@ -165,9 +166,8 @@ class Server extends React.Component<Props, State> {
           status :{' '}
           <span
             style={{
-              color: statusColorMap[response.data?.status]
-                ? statusColorMap[response.data.status]
-                : '#f55840',
+              color:
+                statusColorMap[response.data?.status || 'incompatible API'],
               fontWeight: 'bold',
             }}
           >

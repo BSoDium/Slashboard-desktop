@@ -1,7 +1,11 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import {
+  faTimesCircle,
+  faMinusCircle,
+  faStopCircle,
+} from '@fortawesome/free-solid-svg-icons';
 
 interface State {
   fullscreen: boolean;
@@ -32,7 +36,10 @@ class TitleBar extends React.Component<unknown, State> {
               window.electron.ipcRenderer.currentWindow.minimize();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} className="titlebar-minimize" />
+            <FontAwesomeIcon
+              icon={faMinusCircle}
+              className="titlebar-minimize"
+            />
           </button>
           <button
             type="button"
@@ -41,7 +48,10 @@ class TitleBar extends React.Component<unknown, State> {
               window.electron.ipcRenderer.currentWindow.maximize();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} className="titlebar-maximize" />
+            <FontAwesomeIcon
+              icon={faStopCircle}
+              className="titlebar-maximize"
+            />
           </button>
           <button
             type="button"
@@ -50,7 +60,7 @@ class TitleBar extends React.Component<unknown, State> {
               window.electron.ipcRenderer.currentWindow.close();
             }}
           >
-            <FontAwesomeIcon icon={faCircle} className="titlebar-close" />
+            <FontAwesomeIcon icon={faTimesCircle} className="titlebar-close" />
           </button>
         </div>
       </div>
