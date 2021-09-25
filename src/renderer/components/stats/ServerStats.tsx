@@ -60,7 +60,7 @@ class ServerStats extends React.Component<any, State> {
     clearInterval(this.interval);
   }
 
-  async fetchData(ip: string, port: string, auth: string) {
+  fetchData(ip: string, port: string, auth: string, retryOnFailure = true) {
     const url = `http://${ip}:${port}/status`;
     const { bearer } = this.state;
 
@@ -69,11 +69,13 @@ class ServerStats extends React.Component<any, State> {
       headers: new Headers({ authorization: `Bearer ${bearer}` }),
     };
 
-    return fetch(url, options)
+    fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
-        if (response.data.status === 'access denied') {
-          this.fetchBearer(ip, port, auth);
+        if (response.data?.status === 'access denied' && retryOnFailure) {
+          this.fetchBearer(ip, port, auth, () => {
+            this.fetchData(ip, port, auth, false);
+          });
           return response;
         }
         this.setState({ response, isLoading: false });
@@ -87,7 +89,12 @@ class ServerStats extends React.Component<any, State> {
   /**
    * Fetches the bearer token from the server.
    */
-  async fetchBearer(ip: string, port: string, auth: string) {
+  async fetchBearer(
+    ip: string,
+    port: string,
+    auth: string,
+    callback?: () => void
+  ) {
     const url = `http://${ip}:${port}/authenticate/jwt`;
     const options = {
       method: 'POST',
@@ -105,7 +112,8 @@ class ServerStats extends React.Component<any, State> {
       })
       .catch(() => {
         this.setState({ bearer: '' });
-      });
+      })
+      .then(callback || (() => {}));
   }
 
   render() {
