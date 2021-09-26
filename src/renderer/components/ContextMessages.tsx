@@ -106,8 +106,8 @@ const InvalidKey = () => {
           pairing key is invalid and needs to be updated.
         </p>
         <p className="h-bold" style={{ color: 'rgb(0, 255, 0)' }}>
-          Try retrieving the pairing key from the key.txt file in Pulsar&apos;s
-          root directory, then changing it on the client.
+          Try retrieving the pairing key from the configuration file in
+          Pulsar&apos;s root directory, then changing it on the client.
         </p>
       </div>
       <Link to="/">
