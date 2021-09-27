@@ -61,7 +61,9 @@ class InfoModal extends React.Component<Props, State> {
         return json;
       })
       .catch(() => {
-        this.setState({ changelog: ['Failed to fetch'] });
+        this.setState({
+          changelog: ['Failed to fetch'],
+        });
       });
   }
 
@@ -97,7 +99,13 @@ class InfoModal extends React.Component<Props, State> {
                   <span className="h-bold">Changelog :</span>
 
                   {changelog.length > 1 ? (
-                    <ul>
+                    <ul
+                      style={{
+                        maxHeight: '150px',
+                        paddingRight: '5px',
+                        overflow: 'auto',
+                      }}
+                    >
                       {changelog.map((item: string, index: number) => {
                         // eslint-disable-next-line react/no-array-index-key
                         return <li key={item.length * index}>{item}</li>;
