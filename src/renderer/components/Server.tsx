@@ -284,4 +284,4 @@ class Server extends React.Component<Props, State> {
 }
 
 export default withRouter(Server);
-export { Server };
+export { Server, statusColorMap };

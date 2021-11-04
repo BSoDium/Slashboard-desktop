@@ -7,13 +7,13 @@ import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
 import DeviceInfo from 'renderer/components/stats/info/DeviceInfo';
-import TempIndicator from 'renderer/components/stats/TempIndicator';
 
 import {
   InvalidKey,
   Unresponsive,
   InvalidAPI,
 } from 'renderer/components/ContextMessages';
+import { statusColorMap } from '../Server';
 
 interface MatchParams {
   ip: string;
@@ -26,6 +26,7 @@ interface State {
   bearer: string;
   response: PulsarResponse | undefined;
   fetchFailed: boolean;
+  responseTime: number;
 }
 
 class ServerStats extends React.Component<
@@ -34,6 +35,8 @@ class ServerStats extends React.Component<
 > {
   interval!: NodeJS.Timeout;
 
+  responseTimeOptimum: number;
+
   constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
     this.state = {
@@ -41,7 +44,9 @@ class ServerStats extends React.Component<
       bearer: '',
       response: undefined,
       fetchFailed: false,
+      responseTime: 0,
     };
+    this.responseTimeOptimum = 120; // change this when updating the API, the fetch call's length may vary
     this.fetchData = this.fetchData.bind(this);
   }
 
@@ -79,6 +84,8 @@ class ServerStats extends React.Component<
       headers: new Headers({ authorization: `Bearer ${bearer}` }),
     };
 
+    const start = Date.now();
+
     fetch(url, options)
       .then((response) => response.json())
       .then((response) => {
@@ -88,7 +95,8 @@ class ServerStats extends React.Component<
           });
           return response;
         }
-        this.setState({ response, isLoading: false });
+        const responseTime = Date.now() - start;
+        this.setState({ response, isLoading: false, responseTime });
         return response;
       })
       .catch(() => {
@@ -128,7 +136,7 @@ class ServerStats extends React.Component<
 
   render() {
     const { match } = this.props;
-    const { isLoading, response, fetchFailed } = this.state;
+    const { isLoading, response, fetchFailed, responseTime } = this.state;
     const serverTimedOut = isLoading ? undefined : fetchFailed;
     const authFailed =
       !isLoading &&
@@ -150,11 +158,51 @@ class ServerStats extends React.Component<
         content = (
           <div className="server-stats-wrapper">
             <div className="server-stats-titlebar">
-              <div className="title-box">
-                <h1>{response?.data.name}</h1>
-                <h2>
-                  {ip}:{port}
-                </h2>
+              <div
+                className="flex-row"
+                style={{ maxWidth: '500px', overflow: 'hidden' }}
+              >
+                <div className="flex-column" style={{ marginRight: '10px' }}>
+                  <h1>{response?.data.name}</h1>
+                  <h2>
+                    {ip}:{port}
+                  </h2>
+                </div>
+                <div className="header-block">
+                  <h2>Status</h2>
+                  <h3
+                    style={{
+                      color: statusColorMap[response?.data.status || ''],
+                    }}
+                    className="h-bold"
+                  >
+                    {response?.data.status}
+                  </h3>
+                </div>
+                <div className="header-block">
+                  <h2>Response time</h2>
+                  <h3
+                    style={{
+                      color: `rgb(${
+                        255 *
+                        (1 -
+                          Math.exp(
+                            (Math.log(0.9) / this.responseTimeOptimum) *
+                              responseTime
+                          ))
+                      } , ${
+                        255 *
+                        Math.exp(
+                          (Math.log(0.9) / this.responseTimeOptimum) *
+                            responseTime
+                        )
+                      }, 136)`,
+                    }}
+                    className="h-bold"
+                  >
+                    {responseTime} ms
+                  </h3>
+                </div>
               </div>
             </div>
             <div className="server-stats-content">

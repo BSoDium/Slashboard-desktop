@@ -10,7 +10,7 @@ const SettingSwitch = (props: {
 
   return (
     <div className="setting-line">
-      <div className="title-box">
+      <div className="flex-column">
         <div className="setting-text">{text}</div>
         <div className="setting-description">{subtext}</div>
       </div>
@@ -43,7 +43,7 @@ const SettingCategory = (props: {
   return (
     <div className="setting-category">
       <div
-        className="title-box"
+        className="flex-column"
         style={{
           padding: '5px 0px',
           marginBlockEnd: '20px',
@@ -69,7 +69,7 @@ const SubSettingCategory = (props: {
   return (
     <div className="sub-setting-category">
       <div
-        className="title-box"
+        className="flex-column"
         style={{
           padding: '5px 0px 5px 5px',
           marginBlockEnd: '20px',
