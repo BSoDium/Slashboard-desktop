@@ -2,8 +2,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/static-property-placement */
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 interface State {
   username: string;
@@ -11,12 +10,8 @@ interface State {
   rememberMe: boolean;
 }
 
-class Login extends React.Component<any, State> {
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  };
-
-  constructor(props: any) {
+class Login extends React.Component<RouteComponentProps, State> {
+  constructor(props: RouteComponentProps) {
     super(props);
     this.state = {
       username: '',
@@ -65,9 +60,10 @@ class Login extends React.Component<any, State> {
         <div className="login-card">
           <div className="card-header">
             <h1>L o g i n</h1>
-            <h2>Server dashboard</h2>
+            <h2>Slashboard client</h2>
           </div>
           <div className="card-body">
+            <div className="body-title">Credentials</div>
             <input
               type="text"
               id="username"
@@ -84,7 +80,6 @@ class Login extends React.Component<any, State> {
               required
               onChange={this.handleInputChange}
             />
-
             <div className="settings-banner">
               <div className="autologin">
                 <label htmlFor="rememberme" className="remember-me">
@@ -99,10 +94,9 @@ class Login extends React.Component<any, State> {
                 </label>
               </div>
               <a href="htpps://example.com" className="password-retrieval">
-                Forgot password
+                Forgot password ?
               </a>
             </div>
-
             <div className="login-submit">
               <button
                 type="button"

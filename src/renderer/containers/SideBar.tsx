@@ -1,8 +1,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/static-property-placement */
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import {
   ModalHandler,
@@ -90,11 +89,8 @@ SideBarButton.defaultProps = {
   disabled: false,
 };
 
-interface Props {
+interface Props extends RouteComponentProps {
   tab: JSX.Element;
-  match: any;
-  location: any;
-  history: any;
 }
 
 interface State {
@@ -105,10 +101,6 @@ class SideBar extends React.Component<Props, State> {
   infoModal: HandlerToken | undefined;
 
   settingsModal: HandlerToken | undefined;
-
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  };
 
   constructor(props: Props) {
     super(props);

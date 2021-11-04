@@ -1,18 +1,25 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import CPUChart from 'renderer/components/stats/CPUChart';
 import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
 import DeviceInfo from 'renderer/components/stats/info/DeviceInfo';
+import TempIndicator from 'renderer/components/stats/TempIndicator';
 
 import {
   InvalidKey,
   Unresponsive,
   InvalidAPI,
 } from 'renderer/components/ContextMessages';
+
+interface MatchParams {
+  ip: string;
+  port: string;
+  auth: string;
+}
 
 interface State {
   isLoading: boolean;
@@ -21,10 +28,13 @@ interface State {
   fetchFailed: boolean;
 }
 
-class ServerStats extends React.Component<any, State> {
+class ServerStats extends React.Component<
+  RouteComponentProps<MatchParams>,
+  State
+> {
   interval!: NodeJS.Timeout;
 
-  constructor(props: any) {
+  constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
     this.state = {
       isLoading: true,
@@ -169,7 +179,7 @@ class ServerStats extends React.Component<any, State> {
                     duration={50}
                     stroke="#ff2e2e"
                   />
-                  {/* <TempCharts /> */}
+                  {/* <TempIndicator /> */}
                 </div>
               </div>
               {/* <Console /> */}

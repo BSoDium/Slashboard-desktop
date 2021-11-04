@@ -38,6 +38,8 @@ class InfoModal extends React.Component<Props, State> {
   fetchChangelog(version: string) {
     const url = `https://api.github.com/repos/l3alr0g/Slashboard-desktop/releases/tags/v${version}`;
 
+    console.debug(url);
+
     fetch(url)
       .then((res) => {
         if (res.status === 200) {

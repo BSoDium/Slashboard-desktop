@@ -3,8 +3,7 @@
 /* eslint-disable react/forbid-prop-types */
 /* eslint-disable react/static-property-placement */
 import React from 'react';
-import { withRouter } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import { withRouter, RouteComponentProps } from 'react-router-dom';
 
 import LoadingSkeleton from 'renderer/components/loading/LoadingSkeleton';
 import serverIcon from 'renderer/assets/hardware/server.svg';
@@ -33,13 +32,10 @@ const icons: { [key: string]: string } = {
   laptop: phoneIcon,
 };
 
-interface Props {
+interface Props extends RouteComponentProps {
   data: any;
   id: string;
   listRefresh: () => void;
-  location: any;
-  match: any;
-  history: any;
 }
 
 interface State {
@@ -53,10 +49,6 @@ class Server extends React.Component<Props, State> {
   delModal: HandlerToken | undefined;
 
   editModal: HandlerToken | undefined;
-
-  static propTypes = {
-    history: PropTypes.object.isRequired,
-  };
 
   constructor(props: Props) {
     super(props);
