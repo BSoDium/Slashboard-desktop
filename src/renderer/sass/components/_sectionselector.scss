@@ -1,0 +1,29 @@
+.section-selector {
+  display: flex;
+  flex-direction: row;
+}
+
+.section-button,
+.section-button-active {
+  display: flex;
+  flex-direction: row;
+  margin: 5px;
+  padding: 3px 15px;
+  background-color: rgb(64, 65, 80);
+  height: 30px;
+  align-items: center;
+  border: none;
+  color: white;
+  cursor: pointer;
+}
+
+.section-button-active {
+  background-image: linear-gradient(to right, #1a2980, #26d0ce);
+  background-color: none;
+}
+
+.section-button-text {
+  margin-left: 0.5rem;
+  font-size: 1.3em;
+  font-weight: 100;
+}

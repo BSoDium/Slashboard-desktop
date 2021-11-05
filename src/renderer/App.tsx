@@ -8,7 +8,7 @@ import Dashboard from 'renderer/containers/Dashboard';
 import ControlPanel from 'renderer/containers/tabs/ControlPanel';
 import IOT from 'renderer/containers/tabs/IOT';
 import Logs from 'renderer/containers/tabs/Logs';
-import ServerStats from 'renderer/components/stats/ServerStats';
+import ServerOV from 'renderer/containers/ServerOV';
 
 import 'renderer/App.global.scss';
 import Storage from './utils/Storage';
@@ -41,7 +41,7 @@ class App extends React.Component<Record<string, never>, State> {
           <Route path="/dashboard/servers/:ip-:port-:auth">
             <Window>
               <Dashboard>
-                <ServerStats />
+                <ServerOV />
               </Dashboard>
             </Window>
           </Route>

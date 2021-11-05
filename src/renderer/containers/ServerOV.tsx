@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-non-null-asserted-optional-chain */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import React from 'react';
-import { withRouter, RouteComponentProps } from 'react-router-dom';
+import { withRouter, RouteComponentProps, Route } from 'react-router-dom';
 
-import CPUChart from 'renderer/components/stats/CPUChart';
-import RAMChart from 'renderer/components/stats/RAMChart';
 import LoadingSpinner from 'renderer/components/loading/LoadingSpinner';
-import DeviceInfo from 'renderer/components/stats/info/DeviceInfo';
-
+import SectionSelector from 'renderer/containers/SectionSelector';
 import {
   InvalidKey,
   Unresponsive,
   InvalidAPI,
 } from 'renderer/components/ContextMessages';
-import { statusColorMap } from '../Server';
+import { statusColorMap } from '../components/Server';
+import OVSection from './sections/OVSection';
+import PerfSection from './sections/PerfSection';
 
 interface MatchParams {
   ip: string;
@@ -29,13 +28,15 @@ interface State {
   responseTime: number;
 }
 
-class ServerStats extends React.Component<
+class ServerOV extends React.Component<
   RouteComponentProps<MatchParams>,
   State
 > {
   interval!: NodeJS.Timeout;
 
   responseTimeOptimum: number;
+
+  root: string;
 
   constructor(props: RouteComponentProps<MatchParams>) {
     super(props);
@@ -46,13 +47,13 @@ class ServerStats extends React.Component<
       fetchFailed: false,
       responseTime: 0,
     };
-    this.responseTimeOptimum = 120; // change this when updating the API, the fetch call's length may vary
+    this.responseTimeOptimum = 60; // change this when updating the API, the fetch call's length may vary
+    this.root = '';
     this.fetchData = this.fetchData.bind(this);
   }
 
   componentDidMount() {
-    // eslint-disable-next-line react/destructuring-assignment
-    const { match } = this.props;
+    const { match, history, location } = this.props;
     // fetch the bearer token, then fetch the data
     this.fetchBearer(match.params.ip, match.params.port, match.params.auth)
       .then(() => {
@@ -64,19 +65,40 @@ class ServerStats extends React.Component<
       })
       .catch(() => {});
 
+    // fetch the data every delta ms
+    const delta = 1000; // ms (should be set by the settings)
     this.interval = setInterval(() => {
-      // eslint-disable-next-line react/destructuring-assignment
-      const { ip, port, auth } = this.props.match.params;
+      const { ip, port, auth } = match.params;
       this.fetchData(ip, port, auth);
-    }, 1000);
+    }, delta);
+
+    // save the current path as the root path
+    this.root = location.pathname;
+
+    // load the Overview page
+    history.push(`${location.pathname}/overview`);
   }
 
   componentWillUnmount() {
     clearInterval(this.interval);
   }
 
-  fetchData(ip: string, port: string, auth: string, retryOnFailure = true) {
-    const url = `http://${ip}:${port}/status`;
+  /**
+   * Fetches the data from the server.
+   * @param ip The IP address of the server.
+   * @param port The port of the server.
+   * @param auth The authentication key.
+   * @param retryOnFailure Whether to retry the fetch if it fails. Defaults to true.
+   * @param suffix The suffix to append to the URL. Defaults to 'status'.
+   */
+  fetchData(
+    ip: string,
+    port: string,
+    auth: string,
+    retryOnFailure = true,
+    suffix = 'status'
+  ) {
+    const url = `http://${ip}:${port}/${suffix}`;
     const { bearer } = this.state;
 
     const options = {
@@ -106,6 +128,9 @@ class ServerStats extends React.Component<
 
   /**
    * Fetches the bearer token from the server.
+   * @param ip The IP address of the server.
+   * @param port The port of the server.
+   * @param auth The authentication key.
    */
   async fetchBearer(
     ip: string,
@@ -196,7 +221,13 @@ class ServerStats extends React.Component<
                           (Math.log(0.9) / this.responseTimeOptimum) *
                             responseTime
                         )
-                      }, 136)`,
+                      }, ${
+                        136 *
+                        Math.exp(
+                          (Math.log(0.9) / this.responseTimeOptimum) *
+                            responseTime
+                        )
+                      })`,
                     }}
                     className="h-bold"
                   >
@@ -204,34 +235,14 @@ class ServerStats extends React.Component<
                   </h3>
                 </div>
               </div>
+              <SectionSelector root={this.root} />
             </div>
-            <div className="server-stats-content">
-              <DeviceInfo data={response?.data!} />
-              <div className="server-stats-charts">
-                <div className="chart-group">
-                  <CPUChart
-                    coreStates={[response?.data.hardware.cpu.global!]}
-                    duration={50}
-                    title="CPU"
-                    subtitle="Average load"
-                    stroke="#2effff"
-                  />
-                  <CPUChart
-                    coreStates={response?.data.hardware.cpu.cores!}
-                    duration={50}
-                    title="CPU"
-                    subtitle="Core load"
-                  />
-                  <RAMChart // I need to somehow merge the memory and cpu charts into one component
-                    memoryState={response?.data.hardware.memory!}
-                    duration={50}
-                    stroke="#ff2e2e"
-                  />
-                  {/* <TempIndicator /> */}
-                </div>
-              </div>
-              {/* <Console /> */}
-            </div>
+            <Route path={`${match.path}/overview`}>
+              <OVSection response={response!} fetchData={this.fetchData} />
+            </Route>
+            <Route path={`${match.path}/performance`}>
+              <PerfSection response={response!} fetchData={this.fetchData} />
+            </Route>
           </div>
         );
       } catch (e) {
@@ -249,4 +260,4 @@ class ServerStats extends React.Component<
   }
 }
 
-export default withRouter(ServerStats);
+export default withRouter(ServerOV);

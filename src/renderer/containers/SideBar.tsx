@@ -23,7 +23,7 @@ import {
   IconDefinition,
 } from '@fortawesome/free-solid-svg-icons';
 
-interface ButtonProps {
+interface SbButtonProps {
   icon: IconDefinition;
   text: string;
   componentName: string;
@@ -41,7 +41,7 @@ const SideBarButton = ({
   tab,
   disabled,
   history,
-}: ButtonProps) => {
+}: SbButtonProps): JSX.Element => {
   const statusColor = disabled ? 'rgba(124, 124, 124, 0.548)' : 'white'; // theming.sidebarTabDisabledColor
 
   const handleClick = () => {
