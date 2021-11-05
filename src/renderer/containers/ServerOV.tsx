@@ -243,6 +243,14 @@ class ServerOV extends React.Component<
             <Route path={`${match.path}/performance`}>
               <PerfSection response={response!} fetchData={this.fetchData} />
             </Route>
+            <Route path={`${match.path}/thermal`}>
+              {/* This is temporary, the component just doesn't exist yet */}
+              <PerfSection response={response!} fetchData={this.fetchData} />
+            </Route>
+            <Route path={`${match.path}/ssh`}>
+              {/* This is temporary, the component just doesn't exist yet */}
+              <PerfSection response={response!} fetchData={this.fetchData} />
+            </Route>
           </div>
         );
       } catch (e) {

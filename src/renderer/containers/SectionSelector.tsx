@@ -5,6 +5,8 @@ import {
   IconDefinition,
   faEye,
   faTachometerAlt,
+  faThermometerHalf,
+  faTerminal,
 } from '@fortawesome/free-solid-svg-icons';
 import { RouteComponentProps, withRouter } from 'react-router-dom';
 
@@ -46,6 +48,7 @@ const SectionButton = ({
             icon={icon}
             className="section-button-icon"
             fixedWidth
+            size="lg"
             color="white"
           />
           <div className="section-button-text">{text}</div>
@@ -80,6 +83,22 @@ const SectionSelector = ({ root, history, location }: Props): JSX.Element => {
         focused={location.pathname === `${root}/performance`}
         onClick={() => {
           history.push(`${root}/performance`);
+        }}
+      />
+      <SectionButton
+        icon={faThermometerHalf}
+        text="Thermal"
+        focused={location.pathname === `${root}/thermal`}
+        onClick={() => {
+          history.push(`${root}/thermal`);
+        }}
+      />
+      <SectionButton
+        icon={faTerminal}
+        text="SSH"
+        focused={location.pathname === `${root}/ssh`}
+        onClick={() => {
+          history.push(`${root}/ssh`);
         }}
       />
     </div>
