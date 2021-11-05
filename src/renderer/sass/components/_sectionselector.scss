@@ -20,7 +20,7 @@
 
 .section-button {
   transition: all 0.3s;
-  z-index: 1;
+  z-index: 0;
   &:after {
     content: '';
     position: absolute;
