@@ -6,7 +6,7 @@ const TempIndicator = () => {
     gpu: 56,
   }; // fake
   return (
-    <div className="hardware-component">
+    <div className="section-panel">
       <div className="flex-row">hello</div>
     </div>
   );

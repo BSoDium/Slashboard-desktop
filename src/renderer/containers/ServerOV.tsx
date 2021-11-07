@@ -13,6 +13,8 @@ import {
 import { statusColorMap } from '../components/Server';
 import OVSection from './sections/OVSection';
 import PerfSection from './sections/PerfSection';
+import ThermSection from './sections/ThermSection';
+import SSHSection from './sections/SSHSection';
 
 interface MatchParams {
   ip: string;
@@ -244,12 +246,10 @@ class ServerOV extends React.Component<
               <PerfSection response={response!} fetchData={this.fetchData} />
             </Route>
             <Route path={`${match.path}/thermal`}>
-              {/* This is temporary, the component just doesn't exist yet */}
-              <PerfSection response={response!} fetchData={this.fetchData} />
+              <ThermSection response={response!} fetchData={this.fetchData} />
             </Route>
             <Route path={`${match.path}/ssh`}>
-              {/* This is temporary, the component just doesn't exist yet */}
-              <PerfSection response={response!} fetchData={this.fetchData} />
+              <SSHSection response={response!} fetchData={this.fetchData} />
             </Route>
           </div>
         );

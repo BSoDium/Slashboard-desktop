@@ -41,14 +41,14 @@ export default class DiskInfo extends React.Component<Props, State> {
     const { disks, os } = this.props;
     const { excludeVolatileDisks } = this.state;
     return (
-      <div className="hardware-component" style={{ gridArea: 'disk' }}>
+      <div className="section-panel" style={{ gridArea: 'disk' }}>
         <div className="flex-row">
           <img
             src={hdd}
             alt="hdd"
-            className="display-icon hardware-component-description"
+            className="display-icon section-panel-description"
           />
-          <div className="hardware-component-description">
+          <div className="section-panel-description">
             <div className="t-impact">
               {disks.reduce(
                 (a, disk) =>
@@ -62,7 +62,7 @@ export default class DiskInfo extends React.Component<Props, State> {
             </div>
             <h3>Disks mounted</h3>
           </div>
-          <div className="hardware-component-description">
+          <div className="section-panel-description">
             <div className="t-impact">
               {(
                 disks.reduce(

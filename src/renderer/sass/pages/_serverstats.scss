@@ -24,7 +24,7 @@
   overflow-y: auto;
 }
 
-.server-chart {
+.chart-wrapper {
   box-sizing: border-box;
   width: 100%;
   margin-bottom: 10px;
@@ -78,7 +78,7 @@
   margin: 10px 0px;
 }
 
-.hardware-component {
+.section-panel {
   width: 1fr;
   height: 1fr;
   background-color: theming.$block-accent;
@@ -86,7 +86,7 @@
   padding: 20px 0px;
 }
 
-.hardware-component-description {
+.section-panel-description {
   margin: 0 30px 20px 20px;
   height: fit-content;
 }

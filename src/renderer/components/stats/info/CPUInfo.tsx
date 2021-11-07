@@ -8,29 +8,29 @@ interface Props {
 
 const CPUInfo = ({ data }: Props) => {
   return (
-    <div className="hardware-component" style={{ gridArea: 'cpu' }}>
+    <div className="section-panel" style={{ gridArea: 'cpu' }}>
       <div className="flex-row">
         <img
           src={cpu}
           alt="cpu"
-          className="display-icon hardware-component-description"
+          className="display-icon section-panel-description"
         />
-        <div className="hardware-component-description">
+        <div className="section-panel-description">
           <div className="t-impact">{data.cores.length}</div>
           <h3>Cores</h3>
         </div>
-        <div className="hardware-component-description">
+        <div className="section-panel-description">
           <div className="t-impact">
             {(data.global.speed / 1000).toFixed(2)}
           </div>
           <h3>Ghz</h3>
         </div>
-        <div className="hardware-component-description">
+        <div className="section-panel-description">
           <div className="t-impact">{Math.round(data.global.load)} %</div>
           <h3>Load average</h3>
         </div>
       </div>
-      <div className="hardware-component-description">
+      <div className="section-panel-description">
         <h2 style={{ color: '#fff', fontFamily: 'cairo' }}>
           {data.global.model}
         </h2>

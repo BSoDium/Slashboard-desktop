@@ -1,3 +1,5 @@
+@use 'renderer/sass/variables/theming';
+
 .section-selector {
   display: flex;
   flex-direction: row;
@@ -9,7 +11,7 @@
   display: flex;
   flex-direction: row;
   margin: 5px;
-  padding: 5px 20px;
+  padding: 5px 15px;
   background-color: #404150;
   align-items: center;
   border: none;
@@ -39,7 +41,11 @@
     left: 0;
     width: 0%;
     height: 100%;
-    background-image: linear-gradient(to right, #1a2980, #22b9b7);
+    background-image: linear-gradient(
+      to right,
+      theming.$button-gradient-left,
+      theming.$button-gradient-right
+    );
     transition: all 0.3s;
     border-radius: 10rem;
     z-index: -1;
@@ -53,7 +59,11 @@
 }
 
 .section-button-active {
-  background-image: linear-gradient(to right, #1a2980, #22b9b7);
+  background-image: linear-gradient(
+    to right,
+    theming.$button-gradient-left,
+    theming.$button-gradient-right
+  );
   background-color: none;
 }
 

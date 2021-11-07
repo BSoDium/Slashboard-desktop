@@ -27,28 +27,28 @@ const DeviceInfo = ({ data }: Props) => {
       <CPUInfo data={data.hardware.cpu} />
       <DiskInfo disks={data.hardware.disks} os={data.os} />
 
-      <div className="hardware-component" style={{ gridArea: 'os' }}>
+      <div className="section-panel" style={{ gridArea: 'os' }}>
         <div className="flex-row">
           <img
             src={osIcons[data.os.platform] || osDefault}
             alt="os-icon"
-            className="display-icon hardware-component-description"
+            className="display-icon section-panel-description"
             style={{ marginLeft: '30px' }}
           />
-          <div className="hardware-component-description">
+          <div className="section-panel-description">
             <h2 className="t-impact-min">
               {data.os.type} {data.os.architecture}
             </h2>
             <h3>Build {data.os.release}</h3>
           </div>
-          <div className="hardware-component-description">
+          <div className="section-panel-description">
             <h2 className="t-impact-min">
               {(data.os.uptime / 60 / 60).toFixed(1)} hours
             </h2>
             <h3>uptime</h3>
           </div>
         </div>
-        <div className="hardware-component-description">
+        <div className="section-panel-description">
           <div style={{ marginLeft: '10px' }}>
             <h3 className="h-bold h-primary">Network</h3>
             <h3 className="h-light h-secondary">

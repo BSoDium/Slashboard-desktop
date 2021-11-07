@@ -1,0 +1,161 @@
+@use 'renderer/sass/variables/theming';
+
+.motherboard {
+  width: fit-content;
+  position: relative;
+  height: 440px;
+  border-radius: 10px;
+  background-color: theming.$motherboard-bg;
+  display: flex;
+  flex-direction: column;
+}
+
+.component {
+  cursor: pointer;
+  margin: 5px;
+}
+
+.pull-up {
+  &:hover {
+    transform: translateY(-8px);
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
+  filter: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.pull-out {
+  &:hover {
+    transform: scale(1.05);
+    filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.5));
+  }
+  filter: none;
+  transition: all 0.2s ease-in-out;
+}
+
+.socket {
+  background-color: theming.$socket-bg;
+  border-radius: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: fit-content;
+  height: fit-content;
+  border-bottom: 2px solid #5050a0;
+}
+
+.cpu {
+  width: 100px;
+}
+
+.ram-slots {
+  padding: 10px;
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.ram-slot {
+  height: 30px;
+}
+
+.ram-slot-gfx {
+  width: 100%;
+  height: 12px;
+  background-color: rgb(22, 22, 44);
+  margin-top: -14px;
+  border-bottom: 2px solid #5050a0;
+}
+
+.ram {
+  width: 200px;
+  position: relative;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.25));
+}
+
+.pcie-slots {
+  width: fit-content;
+  height: fit-content;
+  display: flex;
+  flex-direction: column;
+}
+
+.pcie-slot {
+  height: 60px;
+}
+
+.pcie-slot-gfx {
+  width: 140px;
+  margin: 57px;
+  height: 12px;
+  background-color: rgb(22, 22, 44);
+  margin-top: -31px;
+  border-bottom: 2px solid #5050a0;
+}
+
+.gpu {
+  width: 300px;
+  filter: drop-shadow(0.35rem 0.35rem 0.4rem rgba(0, 0, 0, 0.25));
+}
+
+.hole {
+  position: absolute;
+  margin: 5px;
+  width: 5px;
+  height: 5px;
+  border-radius: 100vmax;
+  border: 4px solid rgb(79, 77, 100);
+  background: rgb(7, 32, 47);
+}
+
+.topports {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 10px;
+}
+
+.topconnector {
+  width: 10px;
+  height: 20px;
+  margin-left: 10px;
+  border-radius: 0 0 10px 10px;
+  background-color: rgb(187, 187, 187);
+}
+
+.topplug {
+  width: 110px;
+  height: 20px;
+  margin-left: 10px;
+  background-color: rgb(83, 85, 94);
+  border-radius: 0 0 10px 10px;
+  border-bottom: 4px solid rgb(32, 58, 114);
+}
+
+.topseparator {
+  width: 60px;
+  height: 0;
+}
+
+.sideports {
+  width: fit-content;
+  height: 100%;
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+}
+
+.sideconnector {
+  width: 30px;
+  height: 20px;
+  margin-top: 10px;
+  border-radius: 0px 7px 7px 0px;
+  border-bottom: 4px solid rgb(82, 73, 54);
+  background-color: rgb(240, 228, 140);
+}
+
+.sideseparator {
+  width: 0;
+  height: 60px;
+}

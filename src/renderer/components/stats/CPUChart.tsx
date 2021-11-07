@@ -83,7 +83,7 @@ class CPUChart extends React.Component<Props, State> {
     }
 
     return (
-      <div className="server-chart">
+      <div className="chart-wrapper">
         <ParentSize>
           {(parent) => {
             return (

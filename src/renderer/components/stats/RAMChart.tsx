@@ -61,7 +61,7 @@ class RAMChart extends React.Component<Props, unknown> {
     });
 
     return (
-      <div className="server-chart">
+      <div className="chart-wrapper">
         <ParentSize>
           {(parent) => {
             return (
