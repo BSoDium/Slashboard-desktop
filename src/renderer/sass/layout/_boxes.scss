@@ -20,10 +20,14 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
 }
 
 .flex-column {
   display: flex;
   flex-direction: column;
   flex-wrap: nowrap;
+  width: fit-content;
+  height: fit-content;
 }

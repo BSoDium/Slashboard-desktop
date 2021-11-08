@@ -2,12 +2,14 @@
 
 .motherboard {
   width: fit-content;
+  height: fit-content;
+  min-height: 430px;
   position: relative;
-  height: 440px;
   border-radius: 10px;
   background-color: theming.$motherboard-bg;
   display: flex;
   flex-direction: column;
+  border-bottom: 2px solid #5050a0;
 }
 
 .component {
@@ -37,7 +39,7 @@
   background-color: theming.$socket-bg;
   border-radius: 10px;
   padding: 10px;
-  margin-bottom: 10px;
+  margin: 0px 20px 10px 20px;
   width: fit-content;
   height: fit-content;
   border-bottom: 2px solid #5050a0;
@@ -50,7 +52,6 @@
 .ram-slots {
   padding: 10px;
   width: fit-content;
-  height: fit-content;
   display: flex;
   flex-direction: column;
 }
@@ -75,7 +76,7 @@
 
 .pcie-slots {
   width: fit-content;
-  height: fit-content;
+  margin-left: -20px;
   display: flex;
   flex-direction: column;
 }
@@ -113,6 +114,7 @@
   height: fit-content;
   display: flex;
   flex-direction: row;
+  margin-top: -5px;
   margin-bottom: 10px;
 }
 
@@ -122,6 +124,7 @@
   margin-left: 10px;
   border-radius: 0 0 10px 10px;
   background-color: rgb(187, 187, 187);
+  border-bottom: 2px solid #56568a;
 }
 
 .topplug {
@@ -144,6 +147,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
+  margin-left: -5px;
 }
 
 .sideconnector {
