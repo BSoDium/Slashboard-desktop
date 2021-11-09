@@ -24,10 +24,6 @@ const ThermalPanel: React.FC<Props> = ({ tempData }: Props) => {
         name: 'Intel core i7',
         value: 43,
       },
-      {
-        name: 'Intel Xeon ntm',
-        value: 43,
-      },
     ],
     gpu: [
       {
