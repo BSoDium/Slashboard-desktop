@@ -71,7 +71,7 @@ const SettingsModal = ({ token }: Props) => {
               <SubSettingCategory title="RAM">
                 <SettingSwitch
                   text="Dynamic chart scale"
-                  subtext="Same thing as above, looks wrong most of the time due how slowly the memory usage varies"
+                  subtext="Same thing as above, looks wrong most of the time due to how slowly the memory usage varies"
                   state={{
                     value: settings?.dynamicRAMScale,
                     setter: (value) => {
