@@ -7,7 +7,7 @@ const IOT = ({ name }: { name: string }) => {
         This is the IOT control panel. Although the component exists,&nbsp; you
         should NOT be able to access it. Please file an issue in&nbsp;
         <a
-          href="https://github.com/l3alr0g/Slashboard/issues"
+          href="https://github.com/BSoDium/Slashboard/issues"
           target="_blank"
           rel="noreferrer"
         >

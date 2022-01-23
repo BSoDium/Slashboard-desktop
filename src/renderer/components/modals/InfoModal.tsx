@@ -70,7 +70,7 @@ class InfoModal extends React.Component<Props, State> {
             <div className="spacer" style={{ marginTop: '20px' }}>
               <div className="tag t-dark">
                 <div>
-                  <span className="h-bold">Developer</span> : l3alr0g (Philippe
+                  <span className="h-bold">Developer</span> : BSoDium (Philippe
                   Négrel-Jerzy)
                   <br />
                   <span className="h-bold">Contact</span> :
