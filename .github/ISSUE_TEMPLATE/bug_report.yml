@@ -2,7 +2,7 @@ name: Bug report
 description: Create a report to help us solve a bug
 title: '[Bug]: An explicit title'
 labels: bug
-assignees: l3alr0g
+assignees: BSoDium
 body:
   - type: input
     id: contact
@@ -44,7 +44,7 @@ body:
     id: terms
     attributes:
       label: Code of Conduct
-      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/l3alr0g/Slashboard-desktop/blob/main/CODE_OF_CONDUCT.md)
+      description: By submitting this issue, you agree to follow our [Code of Conduct](https://github.com/BSoDium/Slashboard-desktop/blob/main/CODE_OF_CONDUCT.md)
       options:
         - label: I agree to follow Slashboard's Code of Conduct
           required: true

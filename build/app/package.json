@@ -5,9 +5,9 @@
   "description": "Electron app to monitor personal server statuses in real time",
   "main": "./dist/main/main.js",
   "author": {
-    "name": "l3alr0g",
+    "name": "BSoDium",
     "email": "negreljerzy.philippe@gmail.com",
-    "url": "https://github.com/l3alr0g/Slashboard"
+    "url": "https://github.com/BSoDium/Slashboard"
   },
   "scripts": {
     "electron-rebuild": "node -r ../../.erb/scripts/babel-register.js ../../.erb/scripts/electron-rebuild.js",

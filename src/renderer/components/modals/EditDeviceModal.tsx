@@ -150,7 +150,7 @@ class EditDeviceModal extends React.Component<Props, State> {
               If you did not write it down, you can still get it back, but this
               requires some digging : more info on&nbsp;
               <a
-                href="https://github.com/l3alr0g/Slashboard/#readme"
+                href="https://github.com/BSoDium/Slashboard/#readme"
                 target="_blank"
                 rel="noreferrer"
               >

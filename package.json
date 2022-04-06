@@ -82,22 +82,22 @@
     ],
     "publish": {
       "provider": "github",
-      "owner": "l3alr0g",
+      "owner": "BSoDium",
       "repo": "Slashboard-desktop"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/l3alr0g/Slashboard-desktop.git"
+    "url": "git+https://github.com/BSoDium/Slashboard-desktop.git"
   },
   "author": {
-    "name": "l3alr0g",
+    "name": "BSoDium",
     "email": "negreljerzy.philippe@gmail.com",
-    "url": "https://github.com/l3alr0g"
+    "url": "https://github.com/BSoDium"
   },
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/l3alr0g/Slashboard-desktop/issues"
+    "url": "https://github.com/BSoDium/Slashboard-desktop/issues"
   },
   "keywords": [
     "electron",
@@ -106,7 +106,7 @@
     "dashboard",
     "server"
   ],
-  "homepage": "https://github.com/l3alr0g/Slashboard-desktop#readme",
+  "homepage": "https://github.com/BSoDium/Slashboard-desktop#readme",
   "jest": {
     "testURL": "http://localhost/",
     "moduleNameMapper": {
